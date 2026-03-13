@@ -1,0 +1,6 @@
+C:\Users\pablo\Documents\SDNE_YEAR3_TERM1\Net\Project\Net-Mealventory\Mealventory\Mealventory.Core\bin\Debug\Mealventory.Core.dll
+C:\Users\pablo\Documents\SDNE_YEAR3_TERM1\Net\Project\Net-Mealventory\Mealventory\Mealventory.Core\bin\Debug\Mealventory.Core.pdb
+C:\Users\pablo\Documents\SDNE_YEAR3_TERM1\Net\Project\Net-Mealventory\Mealventory\Mealventory.Core\obj\Debug\Mealventory.Core.csproj.AssemblyReference.cache
+C:\Users\pablo\Documents\SDNE_YEAR3_TERM1\Net\Project\Net-Mealventory\Mealventory\Mealventory.Core\obj\Debug\Mealventory.Core.csproj.CoreCompileInputs.cache
+C:\Users\pablo\Documents\SDNE_YEAR3_TERM1\Net\Project\Net-Mealventory\Mealventory\Mealventory.Core\obj\Debug\Mealventory.Core.dll
+C:\Users\pablo\Documents\SDNE_YEAR3_TERM1\Net\Project\Net-Mealventory\Mealventory\Mealventory.Core\obj\Debug\Mealventory.Core.pdb

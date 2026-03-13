@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Mealventory.API/Mealventory.API.csproj" />
+  <Project Path="Mealventory.Core/Mealventory.Core.csproj" />
+  <Project Path="Mealventory.Tests/Mealventory.Tests.csproj" />
+</Solution>
