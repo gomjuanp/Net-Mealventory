@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mealventory.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85ac370111822259968a41196d31dceaebe8374a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mealventory.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mealventory.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

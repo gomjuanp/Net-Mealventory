@@ -1,5 +1,7 @@
+using Mealventory.API.Database;
 using Mealventory.API.Repositories;
 using Mealventory.Core.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,10 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddScoped<IFoodRepository, FoodRepository>(); // TODO: This has to be changed to use database
+builder.Services.AddDbContext<MealventoryDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); // TODO: Database not created
+
+builder.Services.AddScoped<IFoodRepository, FoodRepository>();
 
 var app = builder.Build();
 

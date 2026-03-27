@@ -65,21 +65,14 @@ External Integration (future implementation)
 # Repository Structure
 
 ```
-SmartFoodScanner
-│
-├── SmartFoodScanner.Api
-│   ├── Controllers
-│   ├── Models
-│   ├── DTOs
-│   ├── Services
-│   ├── Data
-│   ├── Interfaces
-│   └── Program.cs
-│
-├── SmartFoodScanner.Tests
-│
+Net-Mealventory/
+├── Mealventory/
+│   ├── Mealventory.slnx
+│   ├── Mealventory.API/
+│   ├── Mealventory.Core/
+│   └── Mealventory.Tests/
 ├── README.md
-└── .gitignore
+└── SETUP.md
 ```
 
 ---
@@ -99,8 +92,6 @@ Implemented components:
 * DTO layer
 * Testing project structure
 
-Some files contain **TODO comments** indicating where implementation still needs to be completed.
-
 ---
 
 # Features (Planned)
@@ -117,70 +108,38 @@ Core Features
 
 # Database Integration
 
-Currently the project may contain **temporary or placeholder repository logic**.
-
-This must be replaced with a **real SQL database implementation**.
+The project uses **Entity Framework Core** with **SQL Server (LocalDB)**.
 
 The recommended stack:
 
 * **Entity Framework Core**
 * **SQL Server**
 
-### Steps that must be completed
+### Database setup and maintenance
 
-1. Install EF Core packages
+1. Restore dependencies
+
+```bash
+dotnet restore
+```
+
+2. Ensure SQL Server LocalDB is installed
+
+3. Apply migrations
+
+```bash
+dotnet ef database update --project Mealventory.API
+```
+
+4. Keep migrations in source control and avoid manual schema edits
+
+Common EF Core packages in this project:
 
 ```
 Microsoft.EntityFrameworkCore
 Microsoft.EntityFrameworkCore.SqlServer
 Microsoft.EntityFrameworkCore.Tools
 ```
-
-2. Create the database context
-
-```
-Data/
-    ApplicationDbContext.cs
-```
-
-Example structure:
-
-```csharp
-public class ApplicationDbContext : DbContext
-{
-    public DbSet<FoodItem> FoodItems { get; set; }
-
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
-    {
-    }
-}
-```
-
-3. Configure the connection string in
-
-```
-appsettings.json
-```
-
-Example:
-
-```json
-"ConnectionStrings": {
-  "DefaultConnection": "Server=localhost;Database=SmartFoodScannerDB;Trusted_Connection=True;"
-}
-```
-
-4. Register the DbContext in `Program.cs`
-
-5. Create migrations
-
-```
-Add-Migration InitialCreate
-Update-Database
-```
-
-Any files containing `TODO: Replace with database implementation` must be updated accordingly.
 
 ---
 
@@ -245,19 +204,7 @@ Example test cases:
 
 The following components still need to be implemented.
 
-## 1. SQL Database Integration
-
-Replace temporary logic with:
-
-* Entity Framework Core
-* SQL Server database
-* Migrations
-
-Any file marked with **TODO** should be updated.
-
----
-
-## 2. Web Interface (Views)
+## 1. Web Interface (Views)
 
 The project still needs a **web interface** where users can submit food items.
 
@@ -271,7 +218,7 @@ The frontend should communicate with the API endpoints.
 
 ---
 
-## 3. OpenAI Integration
+## 2. OpenAI Integration
 
 The system should generate **recipe suggestions based on available ingredients**.
 
@@ -292,7 +239,7 @@ This feature is **not yet implemented**.
 
 ---
 
-## 4. Email Notifications
+## 3. Email Notifications
 
 Users should receive notifications when food items are close to expiration.
 
@@ -310,7 +257,7 @@ Example:
 
 ---
 
-## 5. Security
+## 4. Security
 
 Security features must be added:
 
@@ -324,6 +271,133 @@ Recommended implementations:
 * JWT authentication
 * HTTPS enforcement
 * Secure API endpoints
+
+---
+
+# Next Steps For The Project
+
+Current foundation already in place:
+
+* Basic CRUD
+* Repository pattern
+* SQL database
+* Controller layer
+
+The next phase is focused on improving code quality, architecture, and production readiness.
+
+## Priority Roadmap (In Order)
+
+### 1. Make Methods Async (Professional Standard)
+
+Update repository methods to asynchronous versions.
+
+Example:
+
+```csharp
+Task<List<FoodItem>> GetAllAsync();
+```
+
+Use EF Core async queries:
+
+```csharp
+await _context.FoodItems.ToListAsync();
+```
+
+Modern APIs should use async/await for scalability and non-blocking I/O.
+
+### 2. Add DTOs (Very Important)
+
+Do not expose entity models directly from the API.
+
+Create DTOs such as:
+
+```text
+DTOs/
+  CreateFoodDto
+  UpdateFoodDto
+  FoodResponseDto
+```
+
+Benefits:
+
+* Decouples database models from API contracts
+* Gives better control over request/response payloads
+* Improves maintainability and versioning
+
+### 3. Add Validation
+
+Add request validation rules, for example:
+
+* Name cannot be empty
+* Quantity must be greater than 0
+* Expiration date cannot be in the past
+
+Options:
+
+* Data Annotations
+* FluentValidation
+
+### 4. Add Proper Error Handling Middleware
+
+Avoid returning raw exceptions.
+
+Create:
+
+```text
+Middleware/ExceptionMiddleware.cs
+```
+
+Return consistent error responses with a standard error format.
+
+### 5. Add Basic Authentication or JWT (If Required)
+
+If this is a real-world deployment, secure the API.
+
+At minimum, implement authentication so endpoints are not fully public.
+
+### 6. Implement OpenAI Mail Generation
+
+If required by the project scope:
+
+* Auto-generate reminder emails for expiring food
+* Add AI-powered suggestions
+
+Create service:
+
+```text
+Services/OpenAiService.cs
+```
+
+Register and inject it through dependency injection.
+
+### 7. Create the Frontend (If Needed)
+
+Current implementation is backend-only.
+
+Next logical UI options:
+
+* Angular
+* Razor Pages
+* React
+
+## Project Maturity Levels
+
+Current state:
+
+* Level 2/5 - Functional CRUD API
+
+Target state:
+
+* Level 4/5 - Clean layered architecture, async flows, DTO boundaries, validation, and secure API
+
+## Team Project Safeguards
+
+Before adding major features, ensure:
+
+* Everyone uses the same .NET version
+* Migrations are committed to source control
+* Nobody edits the database schema manually outside migrations
+* Setup instructions are always kept up to date
 
 ---
 
@@ -347,34 +421,39 @@ Visual Studio 2026
 
 ---
 
-### 3 Restore dependencies
+### 3 Navigate to the solution folder
+
+```bash
+cd Mealventory
+```
+
+---
+
+### 4 Restore dependencies
 
 Visual Studio should restore packages automatically.
 
 If needed:
 
-```
+```bash
 dotnet restore
 ```
 
 ---
 
-### 4 Configure database
-
-Update `appsettings.json` with your SQL Server connection string.
+### 5 Ensure SQL Server LocalDB is installed
 
 ---
 
-### 5 Run migrations
+### 6 Run migrations
 
-```
-Add-Migration InitialCreate
-Update-Database
+```bash
+dotnet ef database update --project Mealventory.API
 ```
 
 ---
 
-### 6 Run the API
+### 7 Run the API
 
 Press
 
@@ -384,13 +463,13 @@ F5
 
 or
 
-```
-dotnet run
+```bash
+dotnet run --project Mealventory.API
 ```
 
 ---
 
-### 7 Test endpoints
+### 8 Test endpoints
 
 Use:
 
@@ -432,15 +511,16 @@ git commit -m "Implemented feature"
 
 5. Push branch
 
-```
-git push origin feature/feature-nameMake a Pull request into develop, after someone reviews it goes into develop, then
+```bash
+git push origin feature/feature-name
 ```
 
 6. Create a Pull Request
    
 ```
-Make a Pull request into develop, after someone reviews it, it goes into develop.
-Let's use main for milestones or after big changes in develop.
+Open a Pull Request into `develop`.
+After review and approval, merge into `develop`.
+Use `main` for milestones or stable releases.
 ```
 
 # Summary
@@ -456,7 +536,8 @@ The API will:
 
 The next steps include:
 
-* Database implementation
+* Async repository and service methods
+* DTO and validation improvements
 * OpenAI integration
 * Web interface
 * Security

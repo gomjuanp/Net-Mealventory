@@ -3,28 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C60818D2-4C3D-4C41-9C38-7DC9F3B1F289}|Mealventory.Tests\\Mealventory.Tests.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.tests\\foodrepositorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C60818D2-4C3D-4C41-9C38-7DC9F3B1F289}|Mealventory.Tests\\Mealventory.Tests.csproj|solutionrelative:mealventory.tests\\foodrepositorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.api\\mealventory.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|solutionrelative:mealventory.api\\mealventory.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A32318A2-2A66-49CC-9110-A16D650AF8DF}|Mealventory.API\\Mealventory.API.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.api\\controllers\\foodcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A32318A2-2A66-49CC-9110-A16D650AF8DF}|Mealventory.API\\Mealventory.API.csproj|solutionrelative:mealventory.api\\controllers\\foodcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|solutionrelative:mealventory.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A32318A2-2A66-49CC-9110-A16D650AF8DF}|Mealventory.API\\Mealventory.API.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.api\\repositories\\foodrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A32318A2-2A66-49CC-9110-A16D650AF8DF}|Mealventory.API\\Mealventory.API.csproj|solutionrelative:mealventory.api\\repositories\\foodrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|solutionrelative:mealventory.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A32318A2-2A66-49CC-9110-A16D650AF8DF}|Mealventory.API\\Mealventory.API.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A32318A2-2A66-49CC-9110-A16D650AF8DF}|Mealventory.API\\Mealventory.API.csproj|solutionrelative:mealventory.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.api\\repository\\foodrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|solutionrelative:mealventory.api\\repository\\foodrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2448C2E7-127C-417D-867E-E81E91E536B7}|Mealventory.Core\\Mealventory.Core.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.core\\interfaces\\ifoodrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2448C2E7-127C-417D-867E-E81E91E536B7}|Mealventory.Core\\Mealventory.Core.csproj|solutionrelative:mealventory.core\\interfaces\\ifoodrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2448C2E7-127C-417D-867E-E81E91E536B7}|Mealventory.Core\\Mealventory.Core.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.core\\models\\footitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2448C2E7-127C-417D-867E-E81E91E536B7}|Mealventory.Core\\Mealventory.Core.csproj|solutionrelative:mealventory.core\\models\\footitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.api\\database\\mealventorydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|solutionrelative:mealventory.api\\database\\mealventorydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,89 +30,80 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FoodRepositoryTests.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Tests\\FoodRepositoryTests.cs",
-              "RelativeDocumentMoniker": "Mealventory.Tests\\FoodRepositoryTests.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Tests\\FoodRepositoryTests.cs",
-              "RelativeToolTip": "Mealventory.Tests\\FoodRepositoryTests.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T00:27:08.98Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FoodController.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Controllers\\FoodController.cs",
-              "RelativeDocumentMoniker": "Mealventory.API\\Controllers\\FoodController.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Controllers\\FoodController.cs",
-              "RelativeToolTip": "Mealventory.API\\Controllers\\FoodController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T00:19:55.185Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Program.cs",
-              "RelativeDocumentMoniker": "Mealventory.API\\Program.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Program.cs",
-              "RelativeToolTip": "Mealventory.API\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T00:17:31.967Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "FoodRepository.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Repositories\\FoodRepository.cs",
-              "RelativeDocumentMoniker": "Mealventory.API\\Repositories\\FoodRepository.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Repositories\\FoodRepository.cs",
-              "RelativeToolTip": "Mealventory.API\\Repositories\\FoodRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Repository\\FoodRepository.cs",
+              "RelativeDocumentMoniker": "Mealventory.API\\Repository\\FoodRepository.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Repository\\FoodRepository.cs",
+              "RelativeToolTip": "Mealventory.API\\Repository\\FoodRepository.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA4wDcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T00:14:34.027Z",
+              "WhenOpened": "2026-03-27T01:47:58.482Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "IFoodRepository.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Core\\Interfaces\\IFoodRepository.cs",
-              "RelativeDocumentMoniker": "Mealventory.Core\\Interfaces\\IFoodRepository.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Core\\Interfaces\\IFoodRepository.cs",
-              "RelativeToolTip": "Mealventory.Core\\Interfaces\\IFoodRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAvAAAAAAAAAA==",
+              "Title": "MealventoryDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Database\\MealventoryDbContext.cs",
+              "RelativeDocumentMoniker": "Mealventory.API\\Database\\MealventoryDbContext.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Database\\MealventoryDbContext.cs",
+              "RelativeToolTip": "Mealventory.API\\Database\\MealventoryDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T00:13:23.447Z",
+              "WhenOpened": "2026-03-27T01:44:30.75Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "FootItem.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Core\\Models\\FootItem.cs",
-              "RelativeDocumentMoniker": "Mealventory.Core\\Models\\FootItem.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Core\\Models\\FootItem.cs",
-              "RelativeToolTip": "Mealventory.Core\\Models\\FootItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T00:12:17.616Z",
+              "DocumentIndex": 0,
+              "Title": "Mealventory.API",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Mealventory.API.csproj",
+              "RelativeDocumentMoniker": "Mealventory.API\\Mealventory.API.csproj",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Mealventory.API.csproj",
+              "RelativeToolTip": "Mealventory.API\\Mealventory.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-27T01:44:03.341Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Mealventory.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\appsettings.json",
+              "RelativeToolTip": "Mealventory.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-27T01:16:20.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Program.cs",
+              "RelativeDocumentMoniker": "Mealventory.API\\Program.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Program.cs",
+              "RelativeToolTip": "Mealventory.API\\Program.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAA4AAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T01:15:15.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c6f34f0d-7ae5-4f3a-be61-fe0c21ae9eb8}"
             }
           ]
         }
