@@ -2,4 +2,5 @@
   <Project Path="Mealventory.API/Mealventory.API.csproj" />
   <Project Path="Mealventory.Core/Mealventory.Core.csproj" Id="2448c2e7-127c-417d-867e-e81e91e536b7" />
   <Project Path="Mealventory.Tests/Mealventory.Tests.csproj" />
+  <Project Path="Mealventory.Web/Mealventory.Web.csproj" Id="8425b1a3-b6bd-41e8-b10c-4685db461e94" />
 </Solution>

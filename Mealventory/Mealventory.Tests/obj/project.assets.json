@@ -246,6 +246,24 @@
       "Microsoft.EntityFrameworkCore.Analyzers/10.0.5": {
         "type": "package"
       },
+      "Microsoft.EntityFrameworkCore.InMemory/10.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "10.0.5",
+          "Microsoft.Extensions.Caching.Memory": "10.0.5",
+          "Microsoft.Extensions.Logging": "10.0.5"
+        },
+        "compile": {
+          "lib/net10.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/10.0.5": {
         "type": "package",
         "dependencies": {
@@ -1794,6 +1812,21 @@
         "docs/PACKAGE.md",
         "microsoft.entityframeworkcore.analyzers.10.0.5.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/10.0.5": {
+      "sha512": "zz4THzlDOrJ7fKU2YUOzQFs2LJ9DgOSr5xFXcDdoD59el73MTQLtQQOAJxQ94F4XDegyL9+2sePSQGdcU25ZxQ==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.inmemory/10.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "lib/net10.0/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/net10.0/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "microsoft.entityframeworkcore.inmemory.10.0.5.nupkg.sha512",
+        "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/10.0.5": {
@@ -3434,6 +3467,7 @@
       "MSTest.TestFramework >= 4.0.1",
       "Mealventory.API >= 1.0.0",
       "Mealventory.Core >= 1.0.0",
+      "Microsoft.EntityFrameworkCore.InMemory >= 10.0.5",
       "Microsoft.NET.Test.Sdk >= 18.0.0"
     ]
   },
@@ -3503,6 +3537,10 @@
             "target": "Package",
             "version": "[4.0.1, )",
             "versionOverride": "[4.0.1, )"
+          },
+          "Microsoft.EntityFrameworkCore.InMemory": {
+            "target": "Package",
+            "version": "[10.0.5, )"
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",

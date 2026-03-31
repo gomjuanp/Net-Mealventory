@@ -589,6 +589,10 @@
               "version": "[4.0.1, )",
               "versionOverride": "[4.0.1, )"
             },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[10.0.5, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[18.0.0, )",
