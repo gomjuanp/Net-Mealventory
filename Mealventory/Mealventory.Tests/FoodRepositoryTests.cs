@@ -17,8 +17,8 @@ public class FoodRepositoryTests
         using var context = new Mealventory.API.Database.MealventoryDbContext(options);
         var repo = new FoodRepository(context);
 
-        repo.Add(new FoodItem { Id = 1, Name = "Apple" });
+        repo.Add(new FoodItem { Id = 1, Name = "Apple", UserId = 1 });
 
-        Assert.AreEqual(1, repo.GetAll().Count());
+        Assert.AreEqual(1, repo.GetAll(1).Count());
     }
 }

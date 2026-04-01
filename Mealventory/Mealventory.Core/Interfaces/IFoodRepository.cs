@@ -11,14 +11,14 @@ namespace Mealventory.Core.Interfaces
 {
     public interface IFoodRepository
     {
-        IEnumerable<FoodItem> GetAll();
+        IEnumerable<FoodItem> GetAll(int userId);
 
-        FoodItem GetById(int id);
+        FoodItem? GetById(int id, int userId);
 
         FoodItem Add(FoodItem item);
 
-        FoodItem Update(FoodItem item);
+        FoodItem? Update(FoodItem item);
 
-        void Delete(int id);
+        void Delete(int id, int userId);
     }
 }

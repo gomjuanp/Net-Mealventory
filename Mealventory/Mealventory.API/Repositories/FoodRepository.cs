@@ -13,14 +13,14 @@ namespace Mealventory.API.Repositories
             _context = context;
         }
 
-        public IEnumerable<FoodItem> GetAll()
+        public IEnumerable<FoodItem> GetAll(int userId)
         {
-            return _context.FoodItems.ToList();
+            return _context.FoodItems.Where(f => f.UserId == userId).ToList();
         }
 
-        public FoodItem GetById(int id)
+        public FoodItem? GetById(int id, int userId)
         {
-            return _context.FoodItems.Find(id);
+            return _context.FoodItems.FirstOrDefault(f => f.Id == id && f.UserId == userId);
         }
 
         public FoodItem Add(FoodItem item)
@@ -30,7 +30,7 @@ namespace Mealventory.API.Repositories
             return item;
         }
 
-        public FoodItem Update(FoodItem item)
+        public FoodItem? Update(FoodItem item)
         {
             var existing = _context.FoodItems.Find(item.Id);
             if (existing == null)
@@ -44,9 +44,9 @@ namespace Mealventory.API.Repositories
             return existing;
         }
 
-        public void Delete(int id)
+        public void Delete(int id, int userId)
         {
-            var item = _context.FoodItems.Find(id);
+            var item = _context.FoodItems.FirstOrDefault(f => f.Id == id && f.UserId == userId);
             if (item == null) return;
 
             _context.FoodItems.Remove(item);

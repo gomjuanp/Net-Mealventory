@@ -34,14 +34,127 @@ namespace Mealventory.API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("FoodItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ExpirationDate = new DateTime(2026, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Milk",
+                            Quantity = 3,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ExpirationDate = new DateTime(2026, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Banana",
+                            Quantity = 2,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ExpirationDate = new DateTime(2026, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Bacon",
+                            Quantity = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ExpirationDate = new DateTime(2026, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Milk",
+                            Quantity = 24,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ExpirationDate = new DateTime(2026, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Banana",
+                            Quantity = 16,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ExpirationDate = new DateTime(2026, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Apple",
+                            Quantity = 12,
+                            UserId = 2
+                        });
+                });
+
+            modelBuilder.Entity("Mealventory.Core.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "juan@gmail.com",
+                            PasswordHash = "password123",
+                            Username = "juan"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "daniel@hotmail.com",
+                            PasswordHash = "password123",
+                            Username = "daniel"
+                        });
+                });
+
+            modelBuilder.Entity("Mealventory.Core.Models.FoodItem", b =>
+                {
+                    b.HasOne("Mealventory.Core.Models.User", "User")
+                        .WithMany("FoodItems")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Mealventory.Core.Models.User", b =>
+                {
+                    b.Navigation("FoodItems");
                 });
 #pragma warning restore 612, 618
         }

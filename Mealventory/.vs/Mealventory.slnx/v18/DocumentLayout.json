@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8425B1A3-B6BD-41E8-B10C-4685DB461E94}|Mealventory.Web\\Mealventory.Web.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.web\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8425B1A3-B6BD-41E8-B10C-4685DB461E94}|Mealventory.Web\\Mealventory.Web.csproj|solutionrelative:mealventory.web\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.api\\database\\mealventorydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10A1DDE2-BC89-2E76-1A02-2C2ADE07E127}|Mealventory.API\\Mealventory.API.csproj|solutionrelative:mealventory.api\\database\\mealventorydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4BD1CF2E-D6FE-28C5-BD2C-D8A96A78E0C2}|Mealventory.Tests\\Mealventory.Tests.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.tests\\foodrepositorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4BD1CF2E-D6FE-28C5-BD2C-D8A96A78E0C2}|Mealventory.Tests\\Mealventory.Tests.csproj|solutionrelative:mealventory.tests\\foodrepositorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8425B1A3-B6BD-41E8-B10C-4685DB461E94}|Mealventory.Web\\Mealventory.Web.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.web\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8425B1A3-B6BD-41E8-B10C-4685DB461E94}|Mealventory.Web\\Mealventory.Web.csproj|solutionrelative:mealventory.web\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8425B1A3-B6BD-41E8-B10C-4685DB461E94}|Mealventory.Web\\Mealventory.Web.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.web\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8425B1A3-B6BD-41E8-B10C-4685DB461E94}|Mealventory.Web\\Mealventory.Web.csproj|solutionrelative:mealventory.web\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8425B1A3-B6BD-41E8-B10C-4685DB461E94}|Mealventory.Web\\Mealventory.Web.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.web\\components\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8425B1A3-B6BD-41E8-B10C-4685DB461E94}|Mealventory.Web\\Mealventory.Web.csproj|solutionrelative:mealventory.web\\components\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8425B1A3-B6BD-41E8-B10C-4685DB461E94}|Mealventory.Web\\Mealventory.Web.csproj|c:\\users\\pablo\\documents\\sdne_year3_term1\\net\\project\\net-mealventory\\mealventory\\mealventory.web\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8425B1A3-B6BD-41E8-B10C-4685DB461E94}|Mealventory.Web\\Mealventory.Web.csproj|solutionrelative:mealventory.web\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,28 +54,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FoodRepositoryTests.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Tests\\FoodRepositoryTests.cs",
-              "RelativeDocumentMoniker": "Mealventory.Tests\\FoodRepositoryTests.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Tests\\FoodRepositoryTests.cs",
-              "RelativeToolTip": "Mealventory.Tests\\FoodRepositoryTests.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-31T16:30:31.564Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Home.razor",
               "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Web\\Components\\Pages\\Home.razor",
               "RelativeDocumentMoniker": "Mealventory.Web\\Components\\Pages\\Home.razor",
               "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Web\\Components\\Pages\\Home.razor",
               "RelativeToolTip": "Mealventory.Web\\Components\\Pages\\Home.razor",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-31T14:19:45.447Z",
+              "WhenOpened": "2026-04-01T03:07:24.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Register.razor",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Web\\Components\\Pages\\Register.razor",
+              "RelativeDocumentMoniker": "Mealventory.Web\\Components\\Pages\\Register.razor",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Web\\Components\\Pages\\Register.razor",
+              "RelativeToolTip": "Mealventory.Web\\Components\\Pages\\Register.razor",
+              "ViewState": "AgIAAAwAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-01T03:07:24.077Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.razor",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Web\\Components\\Pages\\Login.razor",
+              "RelativeDocumentMoniker": "Mealventory.Web\\Components\\Pages\\Login.razor",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Web\\Components\\Pages\\Login.razor",
+              "RelativeToolTip": "Mealventory.Web\\Components\\Pages\\Login.razor",
+              "ViewState": "AgIAAAwAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-01T03:07:23.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.razor",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Web\\Components\\App.razor",
+              "RelativeDocumentMoniker": "Mealventory.Web\\Components\\App.razor",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.Web\\Components\\App.razor",
+              "RelativeToolTip": "Mealventory.Web\\Components\\App.razor",
+              "ViewState": "AgIAAAwAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-01T03:07:01.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MealventoryDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Database\\MealventoryDbContext.cs",
+              "RelativeDocumentMoniker": "Mealventory.API\\Database\\MealventoryDbContext.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\SDNE_YEAR3_TERM1\\Net\\Project\\Net-Mealventory\\Mealventory\\Mealventory.API\\Database\\MealventoryDbContext.cs",
+              "RelativeToolTip": "Mealventory.API\\Database\\MealventoryDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAABrAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-01T03:03:05.534Z",
               "EditorCaption": ""
             }
           ]

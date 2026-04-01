@@ -16,15 +16,15 @@ namespace Mealventory.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<FoodItem> Get()
+        public IEnumerable<FoodItem> Get([FromQuery] int userId)
         {
-            return repository.GetAll();
+            return repository.GetAll(userId);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<FoodItem> Get(int id)
+        public ActionResult<FoodItem> Get(int id, [FromQuery] int userId)
         {
-            var item = repository.GetById(id);
+            var item = repository.GetById(id, userId);
 
             if (item == null)
                 return NotFound();
@@ -37,7 +37,7 @@ namespace Mealventory.API.Controllers
         {
             var created = repository.Add(item);
 
-            return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
+            return CreatedAtAction(nameof(Get), new { id = created.Id, userId = created.UserId }, created);
         }
 
         [HttpPut]
@@ -52,9 +52,9 @@ namespace Mealventory.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, [FromQuery] int userId)
         {
-            repository.Delete(id);
+            repository.Delete(id, userId);
             return NoContent();
         }
     }

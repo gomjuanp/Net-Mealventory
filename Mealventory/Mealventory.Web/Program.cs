@@ -1,10 +1,20 @@
 using Mealventory.Web.Components;
+using Mealventory.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Add Scoped AppState for user session memory
+builder.Services.AddScoped<AppState>();
+
+// Add HttpClient for the API
+builder.Services.AddHttpClient("API", client => 
+{
+    client.BaseAddress = new Uri("https://localhost:7253/");
+});
 
 var app = builder.Build();
 
