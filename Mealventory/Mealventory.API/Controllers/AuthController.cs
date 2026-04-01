@@ -23,11 +23,16 @@ namespace Mealventory.API.Controllers
             if (existingUser != null)
                 return BadRequest("Email already in use.");
 
-            // Extremely basic hash for MVP. Note: In a real app use BCrypt/Argon2.
-            user.PasswordHash = user.PasswordHash;
-
             var createdUser = await _userRepository.CreateUserAsync(user);
-            return Ok(createdUser);
+
+            var response = new AuthUserResponse
+            {
+                Id = createdUser.Id,
+                Username = createdUser.Username,
+                Email = createdUser.Email
+            };
+
+            return Ok(response);
         }
 
         [HttpPost("login")]
@@ -37,7 +42,14 @@ namespace Mealventory.API.Controllers
             if (user == null || user.PasswordHash != request.Password)
                 return Unauthorized("Invalid credentials.");
 
-            return Ok(user);
+            var response = new AuthUserResponse
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Email = user.Email
+            };
+
+            return Ok(response);
         }
     }
 

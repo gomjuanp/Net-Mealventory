@@ -14,6 +14,13 @@ namespace Mealventory.Web.Services
             NotifyStateChanged();
         }
 
+        public void RestoreUser(int? userId, string? username)
+        {
+            CurrentUserId = userId;
+            CurrentUserName = username;
+            NotifyStateChanged();
+        }
+
         public void LogOut()
         {
             CurrentUserId = null;

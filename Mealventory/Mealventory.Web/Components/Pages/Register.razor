@@ -4,6 +4,7 @@
 @inject IHttpClientFactory HttpClientFactory
 @inject AppState AppState
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <div class="row justify-content-center">
     <div class="col-md-6">
@@ -47,19 +48,38 @@
         errorMessage = null;
         var client = HttpClientFactory.CreateClient("API");
 
-        var response = await client.PostAsJsonAsync("api/auth/register", registerModel);
-        if (response.IsSuccessStatusCode)
+        try
         {
-            var user = await response.Content.ReadFromJsonAsync<User>();
-            if (user != null)
+            var response = await client.PostAsJsonAsync("api/auth/register", registerModel);
+
+            if (response.IsSuccessStatusCode)
             {
-                AppState.LogIn(user.Id, user.Username);
-                NavigationManager.NavigateTo("/");
+                var user = await response.Content.ReadFromJsonAsync<AuthUserResponse>();
+
+                if (user != null)
+                {
+                    AppState.LogIn(user.Id, user.Username);
+                    await JS.InvokeVoidAsync("mealventoryAuth.saveUser", user.Id, user.Username);
+                    NavigationManager.NavigateTo("/");
+                }
+                else
+                {
+                    errorMessage = "Registration succeeded, but user data could not be loaded.";
+                }
+            }
+            else
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrWhiteSpace(errorMessage))
+                {
+                    errorMessage = "Registration failed.";
+                }
             }
         }
-        else
+        catch (Exception ex)
         {
-            errorMessage = await response.Content.ReadAsStringAsync();
+            errorMessage = $"Registration failed: {ex.Message}";
         }
     }
 }
