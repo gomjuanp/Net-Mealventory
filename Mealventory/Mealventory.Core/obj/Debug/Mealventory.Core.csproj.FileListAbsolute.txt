@@ -4,3 +4,9 @@ C:\Users\pablo\Documents\SDNE_YEAR3_TERM1\Net\Project\Net-Mealventory\Mealventor
 C:\Users\pablo\Documents\SDNE_YEAR3_TERM1\Net\Project\Net-Mealventory\Mealventory\Mealventory.Core\obj\Debug\Mealventory.Core.csproj.CoreCompileInputs.cache
 C:\Users\pablo\Documents\SDNE_YEAR3_TERM1\Net\Project\Net-Mealventory\Mealventory\Mealventory.Core\obj\Debug\Mealventory.Core.dll
 C:\Users\pablo\Documents\SDNE_YEAR3_TERM1\Net\Project\Net-Mealventory\Mealventory\Mealventory.Core\obj\Debug\Mealventory.Core.pdb
+D:\C# Mealventory\Net-Mealventory\Mealventory\Mealventory.Core\bin\Debug\Mealventory.Core.dll
+D:\C# Mealventory\Net-Mealventory\Mealventory\Mealventory.Core\bin\Debug\Mealventory.Core.pdb
+D:\C# Mealventory\Net-Mealventory\Mealventory\Mealventory.Core\obj\Debug\Mealventory.Core.csproj.AssemblyReference.cache
+D:\C# Mealventory\Net-Mealventory\Mealventory\Mealventory.Core\obj\Debug\Mealventory.Core.csproj.CoreCompileInputs.cache
+D:\C# Mealventory\Net-Mealventory\Mealventory\Mealventory.Core\obj\Debug\Mealventory.Core.dll
+D:\C# Mealventory\Net-Mealventory\Mealventory\Mealventory.Core\obj\Debug\Mealventory.Core.pdb
