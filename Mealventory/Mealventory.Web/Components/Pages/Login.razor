@@ -1,7 +1,7 @@
 @page "/login"
 @using Mealventory.Core.Models
 @using Mealventory.Web.Services
-@inject IHttpClientFactory HttpClientFactory
+@inject AuthApiService AuthApi
 @inject AppState AppState
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JS
@@ -42,11 +42,10 @@
     private async Task HandleLogin()
     {
         errorMessage = null;
-        var client = HttpClientFactory.CreateClient("API");
 
         try
         {
-            var response = await client.PostAsJsonAsync("api/auth/login", loginModel);
+            var response = await AuthApi.LoginAsync(loginModel);
 
             if (response.IsSuccessStatusCode)
             {
@@ -77,11 +76,5 @@
         {
             errorMessage = $"Login failed: {ex.Message}";
         }
-    }
-
-    public class LoginRequest
-    {
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
     }
 }

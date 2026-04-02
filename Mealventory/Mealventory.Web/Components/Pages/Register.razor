@@ -1,7 +1,7 @@
 @page "/register"
 @using Mealventory.Core.Models
 @using Mealventory.Web.Services
-@inject IHttpClientFactory HttpClientFactory
+@inject AuthApiService AuthApi
 @inject AppState AppState
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JS
@@ -46,11 +46,10 @@
     private async Task HandleRegister()
     {
         errorMessage = null;
-        var client = HttpClientFactory.CreateClient("API");
 
         try
         {
-            var response = await client.PostAsJsonAsync("api/auth/register", registerModel);
+            var response = await AuthApi.RegisterAsync(registerModel);
 
             if (response.IsSuccessStatusCode)
             {
