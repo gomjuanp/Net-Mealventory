@@ -52,10 +52,4 @@ namespace Mealventory.API.Controllers
             return Ok(response);
         }
     }
-
-    public class LoginRequest
-    {
-        public required string Email { get; set; }
-        public required string Password { get; set; }
-    }
 }

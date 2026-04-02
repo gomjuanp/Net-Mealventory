@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using Mealventory.Core.Models
 @using Mealventory.Web.Services
-@inject IHttpClientFactory HttpClientFactory
+@inject FoodApiService FoodApi
 @inject AppState AppState
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JS
@@ -172,11 +172,9 @@ else
         if (!AppState.CurrentUserId.HasValue)
             return;
 
-        var client = HttpClientFactory.CreateClient("API");
-
         try
         {
-            foodItems = await client.GetFromJsonAsync<List<FoodItem>>($"api/food?userId={AppState.CurrentUserId}");
+            foodItems = await FoodApi.GetItemsAsync(AppState.CurrentUserId.Value) ?? new List<FoodItem>();
             GenerateNotifications();
         }
         catch (Exception ex)
@@ -218,11 +216,9 @@ else
 
         newItem.UserId = AppState.CurrentUserId.Value;
 
-        var client = HttpClientFactory.CreateClient("API");
-
         try
         {
-            var response = await client.PostAsJsonAsync("api/food", newItem);
+            var response = await FoodApi.AddItemAsync(newItem);
 
             if (response.IsSuccessStatusCode)
             {
@@ -255,11 +251,9 @@ else
         if (!AppState.CurrentUserId.HasValue)
             return;
 
-        var client = HttpClientFactory.CreateClient("API");
-
         try
         {
-            var response = await client.DeleteAsync($"api/food/{id}?userId={AppState.CurrentUserId}");
+            var response = await FoodApi.DeleteItemAsync(id, AppState.CurrentUserId.Value);
 
             if (response.IsSuccessStatusCode)
             {
