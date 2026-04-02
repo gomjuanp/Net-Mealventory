@@ -23,6 +23,17 @@ namespace Mealventory.API.Repositories
             return _context.FoodItems.FirstOrDefault(f => f.Id == id && f.UserId == userId);
         }
 
+        public FoodItem? GetByNameAndExpiration(string name, DateTime expirationDate, int userId)
+        {
+            var normalizedName = name.Trim().ToLower();
+            var normalizedDate = expirationDate.Date;
+
+            return _context.FoodItems.FirstOrDefault(f =>
+                f.UserId == userId &&
+                f.ExpirationDate.Date == normalizedDate &&
+                f.Name.ToLower() == normalizedName);
+        }
+
         public FoodItem Add(FoodItem item)
         {
             _context.FoodItems.Add(item);
@@ -40,6 +51,17 @@ namespace Mealventory.API.Repositories
             existing.Quantity = item.Quantity;
             existing.ExpirationDate = item.ExpirationDate;
 
+            _context.SaveChanges();
+            return existing;
+        }
+
+        public FoodItem? UpdateQuantity(int id, int userId, int quantity)
+        {
+            var existing = _context.FoodItems.FirstOrDefault(f => f.Id == id && f.UserId == userId);
+            if (existing == null)
+                return null;
+
+            existing.Quantity = quantity;
             _context.SaveChanges();
             return existing;
         }

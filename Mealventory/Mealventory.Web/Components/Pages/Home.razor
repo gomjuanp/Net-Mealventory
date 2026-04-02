@@ -37,18 +37,23 @@ else
                 }
 
                 <EditForm Model="newItem" OnValidSubmit="AddItem" FormName="addFoodItemForm">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
                     <div class="row g-3 align-items-end">
                         <div class="col-md-4">
                             <label>Food Name</label>
                             <InputText @bind-Value="newItem.Name" class="form-control" placeholder="e.g. Milk" />
+                            <ValidationMessage For="() => newItem.Name" />
                         </div>
                         <div class="col-md-3">
                             <label>Expiration Date</label>
                             <InputDate @bind-Value="newItem.ExpirationDate" class="form-control" />
+                            <ValidationMessage For="() => newItem.ExpirationDate" />
                         </div>
                         <div class="col-md-2">
                             <label>Quantity</label>
                             <InputNumber @bind-Value="newItem.Quantity" class="form-control" />
+                            <ValidationMessage For="() => newItem.Quantity" />
                         </div>
                         <div class="col-md-3">
                             <button type="submit" class="btn text-white w-100" style="background-color: #8db600;">Add to Inventory</button>
@@ -215,10 +220,24 @@ else
             return;
 
         newItem.UserId = AppState.CurrentUserId.Value;
+        newItem.Name = newItem.Name.Trim();
+        newItem.ExpirationDate = newItem.ExpirationDate.Date;
 
         try
         {
-            var response = await FoodApi.AddItemAsync(newItem);
+            HttpResponseMessage response;
+            var existing = foodItems?.FirstOrDefault(f =>
+                f.ExpirationDate.Date == newItem.ExpirationDate &&
+                f.Name.Equals(newItem.Name, StringComparison.OrdinalIgnoreCase));
+
+            if (existing != null)
+            {
+                response = await FoodApi.UpdateQuantityAsync(existing.Id, AppState.CurrentUserId.Value, existing.Quantity + newItem.Quantity);
+            }
+            else
+            {
+                response = await FoodApi.AddItemAsync(newItem);
+            }
 
             if (response.IsSuccessStatusCode)
             {

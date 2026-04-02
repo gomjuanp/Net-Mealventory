@@ -15,9 +15,13 @@ namespace Mealventory.Core.Interfaces
 
         FoodItem? GetById(int id, int userId);
 
+        FoodItem? GetByNameAndExpiration(string name, DateTime expirationDate, int userId);
+
         FoodItem Add(FoodItem item);
 
         FoodItem? Update(FoodItem item);
+
+        FoodItem? UpdateQuantity(int id, int userId, int quantity);
 
         void Delete(int id, int userId);
     }
