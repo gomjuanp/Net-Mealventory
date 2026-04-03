@@ -17,11 +17,21 @@ namespace Mealventory.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            var existingUser = await _userRepository.GetUserByEmailAsync(user.Email);
+            request.Email = request.Email.Trim();
+            request.Username = request.Username.Trim();
+
+            var existingUser = await _userRepository.GetUserByEmailAsync(request.Email);
             if (existingUser != null)
                 return BadRequest("Email already in use.");
+
+            var user = new User
+            {
+                Username = request.Username,
+                Email = request.Email,
+                PasswordHash = request.Password
+            };
 
             var createdUser = await _userRepository.CreateUserAsync(user);
 

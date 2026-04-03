@@ -28,7 +28,7 @@
                 </div>
                 <div class="mb-3">
                     <label>Password</label>
-                    <InputText @bind-Value="registerModel.PasswordHash" type="password" class="form-control" />
+                    <InputText @bind-Value="registerModel.Password" type="password" class="form-control" />
                 </div>
                 <button type="submit" class="btn text-white w-100" style="background-color:#8db600;">Register</button>
             </EditForm>
@@ -40,7 +40,7 @@
 </div>
 
 @code {
-    private User registerModel = new();
+    private RegisterRequest registerModel = new();
     private string? errorMessage;
 
     private async Task HandleRegister()

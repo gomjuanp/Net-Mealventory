@@ -2,8 +2,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mealventory.Core.Models
 {
-    public class LoginRequest
+    public class RegisterRequest
     {
+        [Required(ErrorMessage = "Username is required.")]
+        [RegularExpression(@".*\S.*", ErrorMessage = "Username is required.")]
+        public string Username { get; set; } = null!;
+
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress(ErrorMessage = "Email format is invalid.")]
         [RegularExpression(@".*\S.*", ErrorMessage = "Email is required.")]

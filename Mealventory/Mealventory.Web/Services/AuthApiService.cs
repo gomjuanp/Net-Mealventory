@@ -9,9 +9,9 @@ namespace Mealventory.Web.Services
             return httpClient.PostAsJsonAsync("api/auth/login", request);
         }
 
-        public Task<HttpResponseMessage> RegisterAsync(User user)
+        public Task<HttpResponseMessage> RegisterAsync(RegisterRequest request)
         {
-            return httpClient.PostAsJsonAsync("api/auth/register", user);
+            return httpClient.PostAsJsonAsync("api/auth/register", request);
         }
     }
 }
