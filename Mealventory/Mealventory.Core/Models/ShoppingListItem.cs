@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Mealventory.Core.Models
 {
-    public class FoodItem
+    public class ShoppingListItem
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public DateTime ExpirationDate { get; set; }
         public int Quantity { get; set; }
+        public bool IsPurchased { get; set; }
+
         public int UserId { get; set; }
-
         public User? User { get; set; }
-
-        public string Location { get; set; } = "Pantry";
     }
 }
