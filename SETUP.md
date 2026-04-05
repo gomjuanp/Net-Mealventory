@@ -57,20 +57,6 @@ dotnet run --project Mealventory.Web
 ## 5. Access the Application
 The app will open automatically in your browser  
 
-If not, navigate to:
-https://localhost:xxxx  
-(use the URL from the Web project)
-
----
-
-## 6. Features
-- User registration and login  
-- Food inventory management  
-- Expiration tracking and notifications  
-- Location tracking (Fridge / Pantry)  
-- Duplicate and empty entry prevention  
-- Shopping list with inventory warnings  
-
 ---
 
 ## Notes
