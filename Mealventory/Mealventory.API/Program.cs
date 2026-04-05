@@ -16,6 +16,7 @@ builder.Services.AddDbContext<MealventoryDbContext>(options =>
 
 builder.Services.AddScoped<IFoodRepository, FoodRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IShoppingListRepository, ShoppingListRepository>();
 
 var app = builder.Build();
 

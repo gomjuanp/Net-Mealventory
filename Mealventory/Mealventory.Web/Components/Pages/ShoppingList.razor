@@ -1,0 +1,197 @@
+﻿@page "/shopping-list"
+@using Mealventory.Core.Models
+@using Mealventory.Web.Services
+@inject IHttpClientFactory HttpClientFactory
+@inject AppState AppState
+
+<PageTitle>Shopping List</PageTitle>
+
+<h3 class="mb-4">Shopping List</h3>
+
+@if (!AppState.CurrentUserId.HasValue)
+{
+    <div class="alert alert-warning">
+        Please log in to use your shopping list.
+    </div>
+}
+else
+{
+    @if (!string.IsNullOrWhiteSpace(warningMessage))
+    {
+        <div class="alert alert-warning">@warningMessage</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+
+    <div class="card p-4 shadow-sm mb-4" style="border-top: 5px solid #8db600;">
+        <h5>Add Item</h5>
+
+        <EditForm Model="@newItem" OnValidSubmit="AddItem">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-6">
+                    <label>Item Name</label>
+                    <InputText @bind-Value="newItem.Name" class="form-control" />
+                </div>
+
+                <div class="col-md-3">
+                    <label>Quantity</label>
+                    <InputNumber @bind-Value="newItem.Quantity" class="form-control" />
+                </div>
+
+                <div class="col-md-3">
+                    <button type="submit" class="btn text-white w-100" style="background-color:#8db600;">
+                        Add to Shopping List
+                    </button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+
+    @if (shoppingItems == null)
+    {
+        <p><em>Loading shopping list...</em></p>
+    }
+    else if (!shoppingItems.Any())
+    {
+        <p>Your shopping list is empty.</p>
+    }
+    else
+    {
+        <table class="table table-hover shadow-sm bg-white">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in shoppingItems)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteItem(item.Id)">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@code {
+    private List<ShoppingListItem>? shoppingItems;
+    private ShoppingListItem newItem = new() { Quantity = 1 };
+    private string? warningMessage;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadItems();
+    }
+
+    private async Task LoadItems()
+    {
+        if (!AppState.CurrentUserId.HasValue)
+            return;
+
+        errorMessage = null;
+
+        try
+        {
+            var client = HttpClientFactory.CreateClient("API");
+
+            shoppingItems = await client.GetFromJsonAsync<List<ShoppingListItem>>(
+                $"api/shoppinglist?userId={AppState.CurrentUserId.Value}") ?? new List<ShoppingListItem>();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading shopping list: {ex.Message}";
+        }
+    }
+
+    private async Task AddItem()
+    {
+        if (!AppState.CurrentUserId.HasValue)
+            return;
+
+        errorMessage = null;
+        warningMessage = null;
+
+        try
+        {
+            newItem.UserId = AppState.CurrentUserId.Value;
+
+            var client = HttpClientFactory.CreateClient("API");
+            var response = await client.PostAsJsonAsync("api/shoppinglist", newItem);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<ShoppingListResponse>();
+
+                warningMessage = result?.Warning;
+
+                newItem = new ShoppingListItem
+                {
+                    Quantity = 1
+                };
+
+                await LoadItems();
+            }
+            else
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrWhiteSpace(errorMessage))
+                {
+                    errorMessage = "Could not add shopping list item.";
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error adding shopping list item: {ex.Message}";
+        }
+    }
+
+    private async Task DeleteItem(int id)
+    {
+        if (!AppState.CurrentUserId.HasValue)
+            return;
+
+        errorMessage = null;
+
+        try
+        {
+            var client = HttpClientFactory.CreateClient("API");
+            var response = await client.DeleteAsync(
+                $"api/shoppinglist/{id}?userId={AppState.CurrentUserId.Value}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadItems();
+            }
+            else
+            {
+                errorMessage = "Could not delete shopping list item.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error deleting shopping list item: {ex.Message}";
+        }
+    }
+
+    public class ShoppingListResponse
+    {
+        public ShoppingListItem? Item { get; set; }
+        public string? Warning { get; set; }
+    }
+}

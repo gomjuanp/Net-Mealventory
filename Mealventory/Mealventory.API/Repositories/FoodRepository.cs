@@ -15,12 +15,22 @@ namespace Mealventory.API.Repositories
 
         public IEnumerable<FoodItem> GetAll(int userId)
         {
-            return _context.FoodItems.Where(f => f.UserId == userId).ToList();
+            return _context.FoodItems
+                .Where(f => f.UserId == userId)
+                .ToList();
+        }
+
+        public IEnumerable<FoodItem> GetByUser(int userId)
+        {
+            return _context.FoodItems
+                .Where(f => f.UserId == userId)
+                .ToList();
         }
 
         public FoodItem? GetById(int id, int userId)
         {
-            return _context.FoodItems.FirstOrDefault(f => f.Id == id && f.UserId == userId);
+            return _context.FoodItems
+                .FirstOrDefault(f => f.Id == id && f.UserId == userId);
         }
 
         public FoodItem Add(FoodItem item)
@@ -32,13 +42,16 @@ namespace Mealventory.API.Repositories
 
         public FoodItem? Update(FoodItem item)
         {
-            var existing = _context.FoodItems.Find(item.Id);
+            var existing = _context.FoodItems
+                .FirstOrDefault(f => f.Id == item.Id && f.UserId == item.UserId);
+
             if (existing == null)
                 return null;
 
             existing.Name = item.Name;
             existing.Quantity = item.Quantity;
             existing.ExpirationDate = item.ExpirationDate;
+            existing.Location = item.Location;
 
             _context.SaveChanges();
             return existing;
@@ -46,8 +59,11 @@ namespace Mealventory.API.Repositories
 
         public void Delete(int id, int userId)
         {
-            var item = _context.FoodItems.FirstOrDefault(f => f.Id == id && f.UserId == userId);
-            if (item == null) return;
+            var item = _context.FoodItems
+                .FirstOrDefault(f => f.Id == id && f.UserId == userId);
+
+            if (item == null)
+                return;
 
             _context.FoodItems.Remove(item);
             _context.SaveChanges();

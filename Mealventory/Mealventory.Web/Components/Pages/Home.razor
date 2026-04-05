@@ -38,21 +38,37 @@ else
 
                 <EditForm Model="newItem" OnValidSubmit="AddItem" FormName="addFoodItemForm">
                     <div class="row g-3 align-items-end">
-                        <div class="col-md-4">
+
+                        <div class="col-md-3">
                             <label>Food Name</label>
                             <InputText @bind-Value="newItem.Name" class="form-control" placeholder="e.g. Milk" />
                         </div>
-                        <div class="col-md-3">
+
+                        <div class="col-md-2">
                             <label>Expiration Date</label>
                             <InputDate @bind-Value="newItem.ExpirationDate" class="form-control" />
                         </div>
+
                         <div class="col-md-2">
                             <label>Quantity</label>
                             <InputNumber @bind-Value="newItem.Quantity" class="form-control" />
                         </div>
-                        <div class="col-md-3">
-                            <button type="submit" class="btn text-white w-100" style="background-color: #8db600;">Add to Inventory</button>
+
+                        <!-- ✅ NEW LOCATION DROPDOWN -->
+                        <div class="col-md-2">
+                            <label>Location</label>
+                            <InputSelect @bind-Value="newItem.Location" class="form-control">
+                                <option value="Fridge">Fridge</option>
+                                <option value="Pantry">Pantry</option>
+                            </InputSelect>
                         </div>
+
+                        <div class="col-md-3">
+                            <button type="submit" class="btn text-white w-100" style="background-color: #8db600;">
+                                Add to Inventory
+                            </button>
+                        </div>
+
                     </div>
                 </EditForm>
             </div>
@@ -89,6 +105,7 @@ else
                     <th>Name</th>
                     <th>Quantity</th>
                     <th>Expiration Date</th>
+                    <th>Location</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -103,6 +120,12 @@ else
                         <td>@item.Name</td>
                         <td>@item.Quantity</td>
                         <td>@item.ExpirationDate.ToShortDateString()</td>
+
+                        <!-- ✅ SHOW LOCATION -->
+                        <td>
+                            <span class="badge bg-secondary">@item.Location</span>
+                        </td>
+
                         <td>
                             @if (isExpired)
                             {
@@ -129,7 +152,14 @@ else
 
 @code {
     private List<FoodItem>? foodItems;
-    private FoodItem newItem = new() { ExpirationDate = DateTime.Today.AddDays(7), Quantity = 1 };
+
+    private FoodItem newItem = new()
+    {
+        ExpirationDate = DateTime.Today.AddDays(7),
+        Quantity = 1,
+        Location = "Pantry"
+    };
+
     private List<string> Notifications = new();
     private string? addErrorMessage;
 
@@ -156,9 +186,7 @@ else
                     AppState.RestoreUser(userId, storedUser.username);
                 }
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         if (AppState.CurrentUserId.HasValue)
@@ -195,17 +223,11 @@ else
         foreach (var item in foodItems)
         {
             if (item.ExpirationDate.Date == DateTime.Today)
-            {
                 Notifications.Add($"Your {item.Name} expires today!");
-            }
             else if (item.ExpirationDate.Date < DateTime.Today)
-            {
                 Notifications.Add($"Your {item.Name} has expired.");
-            }
             else if (item.ExpirationDate.Date <= DateTime.Today.AddDays(3))
-            {
                 Notifications.Add($"Your {item.Name} will expire on {item.ExpirationDate.ToShortDateString()}.");
-            }
         }
     }
 
@@ -229,7 +251,8 @@ else
                 newItem = new FoodItem
                 {
                     ExpirationDate = DateTime.Today.AddDays(7),
-                    Quantity = 1
+                    Quantity = 1,
+                    Location = "Pantry"
                 };
 
                 await LoadItems();
@@ -237,11 +260,8 @@ else
             else
             {
                 addErrorMessage = await response.Content.ReadAsStringAsync();
-
                 if (string.IsNullOrWhiteSpace(addErrorMessage))
-                {
                     addErrorMessage = "Could not add item.";
-                }
             }
         }
         catch (Exception ex)
@@ -260,11 +280,8 @@ else
         try
         {
             var response = await client.DeleteAsync($"api/food/{id}?userId={AppState.CurrentUserId}");
-
             if (response.IsSuccessStatusCode)
-            {
                 await LoadItems();
-            }
         }
         catch (Exception ex)
         {
