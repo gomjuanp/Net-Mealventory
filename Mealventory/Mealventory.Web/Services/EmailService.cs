@@ -1,4 +1,6 @@
-﻿namespace Mealventory.Web.Services
+﻿//Owner: Sabaa Al-Gburi
+
+namespace Mealventory.Web.Services
 {
     public class EmailService
     {
