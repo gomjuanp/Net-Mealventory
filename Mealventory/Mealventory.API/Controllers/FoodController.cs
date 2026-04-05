@@ -35,6 +35,18 @@ namespace Mealventory.API.Controllers
         [HttpPost]
         public ActionResult<FoodItem> Post([FromBody] FoodItem item)
         {
+            if (string.IsNullOrWhiteSpace(item.Name))
+                return BadRequest("Food name cannot be empty.");
+
+            var normalizedName = item.Name.Trim().ToLower();
+
+            var existingItems = repository.GetAll(item.UserId);
+
+            if (existingItems.Any(f => f.Name.Trim().ToLower() == normalizedName))
+                return BadRequest($"{item.Name} already exists in your inventory.");
+
+            item.Name = item.Name.Trim();
+
             var created = repository.Add(item);
 
             return CreatedAtAction(nameof(Get), new { id = created.Id, userId = created.UserId }, created);
