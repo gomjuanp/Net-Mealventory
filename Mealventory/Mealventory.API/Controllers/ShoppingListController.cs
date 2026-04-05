@@ -26,10 +26,15 @@ namespace Mealventory.API.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] ShoppingListItem item)
         {
+            if (string.IsNullOrWhiteSpace(item.Name))
+                return BadRequest("Item name cannot be empty.");
+
+            item.Name = item.Name.Trim();
+
             var inventoryItems = _foodRepo.GetByUser(item.UserId);
 
             var existing = inventoryItems.FirstOrDefault(x =>
-                x.Name.ToLower() == item.Name.ToLower());
+                x.Name.Trim().ToLower() == item.Name.ToLower());
 
             var created = _shoppingRepo.Add(item);
 
