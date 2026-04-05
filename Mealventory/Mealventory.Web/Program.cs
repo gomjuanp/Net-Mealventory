@@ -14,6 +14,11 @@ builder.Services.AddScoped<AppState>();
 var apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? "https://localhost:7253/";
 var apiBaseUri = new Uri(apiBaseUrl);
 
+builder.Services.AddHttpClient("API", client =>
+{
+    client.BaseAddress = apiBaseUri;
+});
+
 // Add typed HttpClient services for the API
 builder.Services.AddHttpClient<FoodApiService>(client =>
 {
