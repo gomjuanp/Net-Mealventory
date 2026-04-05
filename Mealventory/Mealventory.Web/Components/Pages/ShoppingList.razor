@@ -125,8 +125,15 @@ else
         errorMessage = null;
         warningMessage = null;
 
+        if (string.IsNullOrWhiteSpace(newItem.Name))
+        {
+            errorMessage = "Item name cannot be empty.";
+            return;
+        }
+
         try
         {
+            newItem.Name = newItem.Name.Trim();
             newItem.UserId = AppState.CurrentUserId.Value;
 
             var client = HttpClientFactory.CreateClient("API");
