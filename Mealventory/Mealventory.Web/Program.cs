@@ -10,10 +10,24 @@ builder.Services.AddRazorComponents()
 // Add Scoped AppState for user session memory
 builder.Services.AddScoped<AppState>();
 
-// Add HttpClient for the API
-builder.Services.AddHttpClient("API", client => 
+// Configure shared API base URL for typed HttpClient services
+var apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? "https://localhost:7253/";
+var apiBaseUri = new Uri(apiBaseUrl);
+
+builder.Services.AddHttpClient("API", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7253/");
+    client.BaseAddress = apiBaseUri;
+});
+
+// Add typed HttpClient services for the API
+builder.Services.AddHttpClient<FoodApiService>(client =>
+{
+    client.BaseAddress = apiBaseUri;
+});
+
+builder.Services.AddHttpClient<AuthApiService>(client =>
+{
+    client.BaseAddress = apiBaseUri;
 });
 
 var app = builder.Build();
