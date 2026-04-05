@@ -119,12 +119,9 @@ else
                         <td>@item.Name</td>
                         <td>@item.Quantity</td>
                         <td>@item.ExpirationDate.ToShortDateString()</td>
-
-                        <!-- ✅ SHOW LOCATION -->
                         <td>
                             <span class="badge bg-secondary">@item.Location</span>
                         </td>
-
                         <td>
                             @if (isExpired)
                             {
@@ -235,6 +232,13 @@ else
         if (!AppState.CurrentUserId.HasValue)
             return;
 
+        if (string.IsNullOrWhiteSpace(newItem.Name))
+        {
+            addErrorMessage = "Food name cannot be empty.";
+            return;
+        }
+
+        newItem.Name = newItem.Name.Trim();
         newItem.UserId = AppState.CurrentUserId.Value;
 
         try
