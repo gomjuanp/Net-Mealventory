@@ -13,6 +13,8 @@ namespace Mealventory.Core.Interfaces
     {
         IEnumerable<FoodItem> GetAll(int userId);
 
+        IEnumerable<FoodItem> GetByUser(int userId);
+
         FoodItem? GetById(int id, int userId);
 
         FoodItem Add(FoodItem item);
