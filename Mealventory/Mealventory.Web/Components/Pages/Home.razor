@@ -4,6 +4,7 @@
 @inject FoodApiService FoodApi
 @inject AppState AppState
 @inject NavigationManager NavigationManager
+@inject NotificationManager NotificationManager
 @inject IJSRuntime JS
 
 <PageTitle>Mealventory - Dashboard</PageTitle>
@@ -192,17 +193,25 @@ else
 
         foreach (var item in foodItems)
         {
+            string message = "";
+
             if (item.ExpirationDate.Date == DateTime.Today)
             {
-                Notifications.Add($"Your {item.Name} expires today!");
+                message = $"Your {item.Name} expires today!";
             }
             else if (item.ExpirationDate.Date < DateTime.Today)
             {
-                Notifications.Add($"Your {item.Name} has expired.");
+                message = $"Your {item.Name} has expired.";
             }
             else if (item.ExpirationDate.Date <= DateTime.Today.AddDays(3))
             {
-                Notifications.Add($"Your {item.Name} will expire on {item.ExpirationDate.ToShortDateString()}.");
+                message = $"Your {item.Name} will expire on {item.ExpirationDate.ToShortDateString()}.";
+            }
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                Notifications.Add(message);
+                NotificationManager.AddNotification(message);
             }
         }
     }

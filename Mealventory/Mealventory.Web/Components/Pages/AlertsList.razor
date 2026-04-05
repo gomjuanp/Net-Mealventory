@@ -1,0 +1,40 @@
+﻿@page "/alerts"
+@using Mealventory.Web.Services
+@using Mealventory.Core.Models
+@inject NotificationManager notificationManager
+
+<h3>Notifications</h3>
+
+<button class="btn btn-warning" @onclick="AddTest">Add Test Notification</button>
+<table class="table">
+    <tr>
+        <th>Message</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var n in notificationManager.GetAll())
+    {
+        <tr>
+            <td>@n.Message</td>
+            <td>@n.CreatedDate</td>
+            <td>@(n.IsRead ? "Read" : "Unread")</td>
+            <td>
+                <button @onclick="() => MarkRead(n)">Mark as Read</button>
+            </td>
+        </tr>
+    }
+</table>
+
+@code {
+    void MarkRead(Notification n)
+    {
+        notificationManager.MarkAsRead(n);
+    }
+
+    void AddTest()
+    {
+        notificationManager.AddNotification("Milk expires tomorrow!");
+    }
+}
