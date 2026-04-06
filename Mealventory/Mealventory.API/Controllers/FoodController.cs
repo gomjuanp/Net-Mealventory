@@ -1,4 +1,5 @@
-﻿using Mealventory.Core.Interfaces;
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 88% of the code in this file
+using Mealventory.Core.Interfaces;
 using Mealventory.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 

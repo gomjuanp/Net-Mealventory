@@ -1,4 +1,5 @@
-﻿using Mealventory.Core.Models;
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 95.24% of the code in this file
+using Mealventory.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mealventory.API.Database

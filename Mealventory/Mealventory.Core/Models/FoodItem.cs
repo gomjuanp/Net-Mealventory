@@ -1,4 +1,5 @@
-﻿using System;
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 71% of the code in this file
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

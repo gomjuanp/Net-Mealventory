@@ -1,3 +1,4 @@
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 100% of the code in this file
 using Mealventory.Core.Models;
 using System.Threading.Tasks;
 
