@@ -1,29 +1,45 @@
-// Owner 1: "Juan Pablo Ordonez Gomez" has added 95.24% of the code in this file
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 95% of the code in this file
+// Owner 2: "Daniel Bajenov" has added 5% of the code in this file
+// Principal Author: Juan Pablo Ordonez Gomez
+// Description: Entity Framework Core DbContext for Mealventory application. Defines DbSets and seeds initial data.
 using Mealventory.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mealventory.API.Database
 {
-    /// Configures database entities and relationships for the Mealventory API.
+    /// <summary>
+    /// EF Core DbContext for the application.
+    /// </summary>
     public class MealventoryDbContext : DbContext
     {
-        /// Method to create a database context with configured options.
+        /// <summary>
+        /// Constructs the DbContext with the specified options.
+        /// </summary>
+        /// <param name="options">DbContext options.</param>
         public MealventoryDbContext(DbContextOptions<MealventoryDbContext> options)
             : base(options)
         {
         }
 
-        /// Field to access user records.
+        /// <summary>
+        /// Users table.
+        /// </summary>
         public DbSet<User> Users { get; set; }
 
-        /// Field to access food item records.
+        /// <summary>
+        /// FoodItems table.
+        /// </summary>
         public DbSet<FoodItem> FoodItems { get; set; }
 
-
-        /// Field to access shopping list item records.
+        /// <summary>
+        /// Shopping list items table.
+        /// </summary>
         public DbSet<ShoppingListItem> ShoppingListItems { get; set; }
 
-        /// Method to configure model relationships and seed data.
+        /// <summary>
+        /// Configures the EF Core model and seeds initial data.
+        /// </summary>
+        /// <param name="modelBuilder">Model builder.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
