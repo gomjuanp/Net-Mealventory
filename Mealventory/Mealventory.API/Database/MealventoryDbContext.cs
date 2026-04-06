@@ -19,6 +19,7 @@ namespace Mealventory.API.Database
         /// Field to access food item records.
         public DbSet<FoodItem> FoodItems { get; set; }
 
+
         /// Field to access shopping list item records.
         public DbSet<ShoppingListItem> ShoppingListItems { get; set; }
 

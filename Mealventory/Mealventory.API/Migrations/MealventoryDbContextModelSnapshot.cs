@@ -22,189 +22,160 @@ namespace Mealventory.API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            // FoodItem
             modelBuilder.Entity("Mealventory.Core.Models.FoodItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("ExpirationDate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Location")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                b.Property<int>("Quantity")
+                    .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                b.Property<int>("UserId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("UserId");
 
-                    b.ToTable("FoodItems");
+                b.HasIndex("UserId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ExpirationDate = new DateTime(2026, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Location = "Pantry",
-                            Name = "Milk",
-                            Quantity = 3,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ExpirationDate = new DateTime(2026, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Location = "Pantry",
-                            Name = "Banana",
-                            Quantity = 2,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ExpirationDate = new DateTime(2026, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Location = "Pantry",
-                            Name = "Bacon",
-                            Quantity = 1,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ExpirationDate = new DateTime(2026, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Location = "Pantry",
-                            Name = "Milk",
-                            Quantity = 24,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ExpirationDate = new DateTime(2026, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Location = "Pantry",
-                            Name = "Banana",
-                            Quantity = 16,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ExpirationDate = new DateTime(2026, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Location = "Pantry",
-                            Name = "Apple",
-                            Quantity = 12,
-                            UserId = 2
-                        });
-                });
+                b.ToTable("FoodItems");
+
+                b.HasData(
+                    new { Id = 1, ExpirationDate = new DateTime(2026, 4, 15), Location = "Pantry", Name = "Milk", Quantity = 3, UserId = 1 },
+                    new { Id = 2, ExpirationDate = new DateTime(2026, 4, 12), Location = "Pantry", Name = "Banana", Quantity = 2, UserId = 1 },
+                    new { Id = 3, ExpirationDate = new DateTime(2026, 4, 24), Location = "Pantry", Name = "Bacon", Quantity = 1, UserId = 1 },
+                    new { Id = 4, ExpirationDate = new DateTime(2026, 4, 15), Location = "Pantry", Name = "Milk", Quantity = 24, UserId = 2 },
+                    new { Id = 5, ExpirationDate = new DateTime(2026, 4, 12), Location = "Pantry", Name = "Banana", Quantity = 16, UserId = 2 },
+                    new { Id = 6, ExpirationDate = new DateTime(2026, 4, 20), Location = "Pantry", Name = "Apple", Quantity = 12, UserId = 2 }
+                );
+            });
+
+            // ShoppingListItem
+            modelBuilder.Entity("Mealventory.Core.Models.ShoppingListItem", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
+
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                b.Property<bool>("IsPurchased")
+                    .HasColumnType("bit");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<int>("Quantity")
+                    .HasColumnType("int");
+
+                b.Property<int>("UserId")
+                    .HasColumnType("int");
+
+                b.HasKey("Id");
+
+                b.HasIndex("UserId");
+
+                b.ToTable("ShoppingListItems");
+            });
+
+            // Notification (feature branch)
+            modelBuilder.Entity("Mealventory.Core.Models.Notification", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
+
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                b.Property<DateTime>("CreatedDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<bool>("IsRead")
+                    .HasColumnType("bit");
+
+                b.Property<string>("Message")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("Id");
+
+                b.ToTable("Notifications");
+            });
+
+            // User
+            modelBuilder.Entity("Mealventory.Core.Models.User", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
+
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("PasswordHash")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Username")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("Id");
+
+                b.ToTable("Users");
+
+                b.HasData(
+                    new { Id = 1, Email = "juan@gmail.com", PasswordHash = "password123", Username = "juan" },
+                    new { Id = 2, Email = "daniel@hotmail.com", PasswordHash = "password123", Username = "daniel" }
+                );
+            });
+
+            // Relationships
+            modelBuilder.Entity("Mealventory.Core.Models.FoodItem", b =>
+            {
+                b.HasOne("Mealventory.Core.Models.User", "User")
+                    .WithMany("FoodItems")
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.Navigation("User");
+            });
 
             modelBuilder.Entity("Mealventory.Core.Models.ShoppingListItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.HasOne("Mealventory.Core.Models.User", "User")
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsPurchased")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ShoppingListItems");
-                });
+                b.Navigation("User");
+            });
 
             modelBuilder.Entity("Mealventory.Core.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "juan@gmail.com",
-                            PasswordHash = "password123",
-                            Username = "juan"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Email = "daniel@hotmail.com",
-                            PasswordHash = "password123",
-                            Username = "daniel"
-                        });
-                });
-
-            modelBuilder.Entity("Mealventory.Core.Models.FoodItem", b =>
-                {
-                    b.HasOne("Mealventory.Core.Models.User", "User")
-                        .WithMany("FoodItems")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Mealventory.Core.Models.ShoppingListItem", b =>
-                {
-                    b.HasOne("Mealventory.Core.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Mealventory.Core.Models.User", b =>
-                {
-                    b.Navigation("FoodItems");
-                });
+            {
+                b.Navigation("FoodItems");
+            });
 #pragma warning restore 612, 618
         }
     }

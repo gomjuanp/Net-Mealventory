@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddSingleton<NotificationManager>();
+builder.Services.AddSingleton<EmailService>();
+
 // Add Scoped AppState for user session memory
 builder.Services.AddScoped<AppState>();
 
@@ -49,5 +52,6 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
 
 app.Run();

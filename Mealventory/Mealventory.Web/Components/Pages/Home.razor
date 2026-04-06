@@ -7,6 +7,7 @@
 @inject FoodApiService FoodApi
 @inject AppState AppState
 @inject NavigationManager NavigationManager
+@inject NotificationManager NotificationManager
 @inject IJSRuntime JS
 
 <PageTitle>Mealventory - Dashboard</PageTitle>
@@ -39,12 +40,12 @@ else
                     <div class="alert alert-danger mt-3">@addErrorMessage</div>
                 }
 
-                <EditForm Model="newItem" OnValidSubmit="AddItem" FormName="addFoodItemForm">
+                <EditForm Model="newItem" OnValidSubmit="AddItem">
                     <div class="row g-3 align-items-end">
 
                         <div class="col-md-3">
                             <label>Food Name</label>
-                            <InputText @bind-Value="newItem.Name" class="form-control" placeholder="e.g. Milk" />
+                            <InputText @bind-Value="newItem.Name" class="form-control" />
                         </div>
 
                         <div class="col-md-2">
@@ -76,10 +77,25 @@ else
             </div>
         </div>
     </div>
+
+    @if (Notifications.Any())
+    {
+        <div class="alert alert-warning">
+            <h5>Notifications</h5>
+            <ul>
+                @foreach (var note in Notifications)
+                {
+                    <li>@note</li>
+                }
+            </ul>
+        </div>
+    }
 }
 
 @code {
-    /// Field to store the item being created from the add form.
+    private List<FoodItem>? foodItems;
+    private List<string> Notifications = new();
+
     private FoodItem newItem = new()
     {
         ExpirationDate = DateTime.Today.AddDays(7),
@@ -87,21 +103,14 @@ else
         Location = "Pantry"
     };
 
-    /// Field to store the latest add-item error message.
     private string? addErrorMessage;
 
-    /// Author: Juan Pablo Ordonez Gomez.
-    /// Stores user values loaded from browser storage.
     private class StoredUser
     {
-        /// Field to store the persisted user identifier string.
         public string? userId { get; set; }
-
-        /// Field to store the persisted username.
         public string? username { get; set; }
     }
 
-    /// Method to initialize state subscriptions, restore user data, and load inventory items.
     protected override async Task OnInitializedAsync()
     {
         AppState.OnChange += StateHasChanged;
@@ -119,11 +128,52 @@ else
                     AppState.RestoreUser(userId, storedUser.username);
                 }
             }
-            catch { }
+            catch
+            {
+            }
+        }
+
+        if (AppState.CurrentUserId.HasValue)
+        {
+            await LoadItems();
         }
     }
 
-    /// Method to add a new food item for the current user.
+    private async Task LoadItems()
+    {
+        if (!AppState.CurrentUserId.HasValue)
+            return;
+
+        foodItems = await FoodApi.GetItemsAsync(AppState.CurrentUserId.Value) ?? new List<FoodItem>();
+        GenerateNotifications();
+    }
+
+    private void GenerateNotifications()
+    {
+        Notifications.Clear();
+
+        if (foodItems == null)
+            return;
+
+        foreach (var item in foodItems)
+        {
+            string message = "";
+
+            if (item.ExpirationDate.Date == DateTime.Today)
+                message = $"Your {item.Name} expires today!";
+            else if (item.ExpirationDate.Date < DateTime.Today)
+                message = $"Your {item.Name} has expired.";
+            else if (item.ExpirationDate.Date <= DateTime.Today.AddDays(3))
+                message = $"Your {item.Name} will expire soon.";
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                Notifications.Add(message);
+                NotificationManager.AddNotification(message);
+            }
+        }
+    }
+
     private async Task AddItem()
     {
         addErrorMessage = null;
@@ -131,50 +181,30 @@ else
         if (!AppState.CurrentUserId.HasValue)
             return;
 
-        if (string.IsNullOrWhiteSpace(newItem.Name))
-        {
-            addErrorMessage = "Food name cannot be empty.";
-            return;
-        }
-
-        newItem.Name = newItem.Name.Trim();
         newItem.UserId = AppState.CurrentUserId.Value;
 
-        try
-        {
-            var response = await FoodApi.AddItemAsync(newItem);
+        var response = await FoodApi.AddItemAsync(newItem);
 
-            if (response.IsSuccessStatusCode)
-            {
-                newItem = new FoodItem
-                {
-                    ExpirationDate = DateTime.Today.AddDays(7),
-                    Quantity = 1,
-                    Location = "Pantry"
-                };
-            }
-            else
-            {
-                addErrorMessage = await response.Content.ReadAsStringAsync();
-                if (string.IsNullOrWhiteSpace(addErrorMessage))
-                    addErrorMessage = "Could not add item.";
-            }
-        }
-        catch (Exception ex)
+        if (response.IsSuccessStatusCode)
         {
-            addErrorMessage = $"Error adding item: {ex.Message}";
+            newItem = new FoodItem
+            {
+                ExpirationDate = DateTime.Today.AddDays(7),
+                Quantity = 1,
+                Location = "Pantry"
+            };
+
+            await LoadItems();
         }
     }
 
-    /// Method to clear user session and navigate to the home page.
     private async Task Logout()
     {
         AppState.LogOut();
         await JS.InvokeVoidAsync("mealventoryAuth.clearUser");
-        NavigationManager.NavigateTo("/", forceLoad: true);
+        NavigationManager.NavigateTo("/", true);
     }
 
-    /// Method to unsubscribe from state change notifications.
     public void Dispose()
     {
         AppState.OnChange -= StateHasChanged;
