@@ -1,0 +1,204 @@
+﻿@page "/fridge"
+@using Mealventory.Core.Models
+@using Mealventory.Web.Services
+@inject FoodApiService FoodApi
+@inject AppState AppState
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JS
+
+@if (!AppState.CurrentUserId.HasValue)
+{
+    NavigationManager.NavigateTo("/login");
+}
+
+<PageTitle>Mealventory - Fridge</PageTitle>
+
+@if (!AppState.CurrentUserId.HasValue)
+{
+    <div class="text-center mt-5">
+        <h1 style="color: #000;">Welcome to <span style="color: #8db600;">Mealventory</span></h1>
+        <p class="lead mt-3">Keep track of your food and avoid expiration!</p>
+        <div class="mt-4">
+            <a href="/login" class="btn text-white me-2" style="background-color: #8db600; width: 120px;">Login</a>
+            <a href="/register" class="btn btn-dark" style="width: 120px;">Register</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Hello, @AppState.CurrentUserName!</h2>
+        <button class="btn btn-outline-dark" @onclick="Logout">Logout</button>
+    </div>
+
+    @if (Notifications.Any())
+    {
+        <div class="alert alert-warning shadow-sm">
+            <h5 class="alert-heading">Expiring Soon!</h5>
+            <ul class="mb-0">
+                @foreach (var note in Notifications)
+                {
+                    <li>@note</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <h4>Fridge</h4>
+    @if (foodItems == null)
+    {
+        <p><em>Loading fridge items...</em></p>
+    }
+    else if (!foodItems.Any())
+    {
+        <p>Your fridge is empty.</p>
+    }
+    else
+    {
+        <table class="table table-hover shadow-sm bg-white">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Expiration Date</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in foodItems)
+                {
+                    var isExpired = item.ExpirationDate.Date < DateTime.Today;
+                    var isExpiringSoon = !isExpired && item.ExpirationDate.Date <= DateTime.Today.AddDays(3);
+
+                    <tr class="@(isExpired ? "table-danger" : (isExpiringSoon ? "table-warning" : ""))">
+                        <td>@item.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.ExpirationDate.ToShortDateString()</td>
+                        <td>
+                            <span class="badge bg-secondary">@item.Location</span>
+                        </td>
+                        <td>
+                            @if (isExpired)
+                            {
+                                <span class="badge bg-danger">Expired</span>
+                            }
+                            else if (isExpiringSoon)
+                            {
+                                <span class="badge bg-warning text-dark">Expiring Soon</span>
+                            }
+                            else
+                            {
+                                <span class="badge" style="background-color: #8db600;">Fresh</span>
+                            }
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteItem(item.Id)">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@code {
+    private List<FoodItem>? foodItems;
+    private List<string> Notifications = new();
+
+    private class StoredUser
+    {
+        public string? userId { get; set; }
+        public string? username { get; set; }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        AppState.OnChange += StateHasChanged;
+
+        if (!AppState.CurrentUserId.HasValue)
+        {
+            try
+            {
+                var storedUser = await JS.InvokeAsync<StoredUser>("mealventoryAuth.getUser");
+
+                if (storedUser != null &&
+                    int.TryParse(storedUser.userId, out var userId) &&
+                    !string.IsNullOrWhiteSpace(storedUser.username))
+                {
+                    AppState.RestoreUser(userId, storedUser.username);
+                }
+            }
+            catch { }
+        }
+
+        if (AppState.CurrentUserId.HasValue)
+        {
+            await LoadItems();
+        }
+    }
+
+    private async Task LoadItems()
+    {
+        if (!AppState.CurrentUserId.HasValue)
+            return;
+
+        try
+        {
+            foodItems = await FoodApi.GetItemsByLocationAsync(AppState.CurrentUserId.Value, "Fridge");
+            GenerateNotifications();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading fridge items: {ex.Message}");
+        }
+    }
+
+    private void GenerateNotifications()
+    {
+        Notifications.Clear();
+
+        if (foodItems == null)
+            return;
+
+        foreach (var item in foodItems)
+        {
+            if (item.ExpirationDate.Date == DateTime.Today)
+                Notifications.Add($"Your {item.Name} expires today!");
+            else if (item.ExpirationDate.Date < DateTime.Today)
+                Notifications.Add($"Your {item.Name} has expired.");
+            else if (item.ExpirationDate.Date <= DateTime.Today.AddDays(3))
+                Notifications.Add($"Your {item.Name} will expire on {item.ExpirationDate.ToShortDateString()}.");
+        }
+    }
+
+    private async Task DeleteItem(int id)
+    {
+        if (!AppState.CurrentUserId.HasValue)
+            return;
+
+        try
+        {
+            var response = await FoodApi.DeleteItemAsync(id, AppState.CurrentUserId.Value);
+            if (response.IsSuccessStatusCode)
+                await LoadItems();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error deleting item: {ex.Message}");
+        }
+    }
+
+    private async Task Logout()
+    {
+        AppState.LogOut();
+        await JS.InvokeVoidAsync("mealventoryAuth.clearUser");
+        NavigationManager.NavigateTo("/", forceLoad: true);
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+}

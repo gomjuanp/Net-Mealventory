@@ -9,6 +9,17 @@ namespace Mealventory.Web.Services
             return httpClient.GetFromJsonAsync<List<FoodItem>>($"api/food?userId={userId}");
         }
 
+        public async Task<List<FoodItem>> GetItemsByLocationAsync(int userId, string location)
+        {
+            var items = await httpClient.GetFromJsonAsync<List<FoodItem>>($"api/food?userId={userId}")
+                        ?? new List<FoodItem>();
+
+            return items
+                .Where(x => string.Equals(x.Location, location, StringComparison.OrdinalIgnoreCase))
+                .OrderBy(x => x.ExpirationDate)
+                .ToList();
+        }
+
         public Task<HttpResponseMessage> AddItemAsync(FoodItem item)
         {
             return httpClient.PostAsJsonAsync("api/food", item);

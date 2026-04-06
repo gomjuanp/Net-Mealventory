@@ -3,6 +3,12 @@
 @using Mealventory.Web.Services
 @inject IHttpClientFactory HttpClientFactory
 @inject AppState AppState
+@inject NavigationManager NavigationManager
+
+@if (!AppState.CurrentUserId.HasValue)
+{
+    NavigationManager.NavigateTo("/login");
+}
 
 <PageTitle>Shopping List</PageTitle>
 
@@ -33,7 +39,7 @@ else
             <div class="row g-3 align-items-end">
                 <div class="col-md-6">
                     <label>Item Name</label>
-                    <InputText @bind-Value="newItem.Name" class="form-control" />
+                    <InputText @bind-Value="newItem.Name" class="form-control" placeholder="e.g. Milk" />
                 </div>
 
                 <div class="col-md-3">
