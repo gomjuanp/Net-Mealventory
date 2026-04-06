@@ -1,8 +1,8 @@
 # Mealventory – Setup & Run Instructions
 
 ## Requirements
-- .NET SDK (version 6.0 or later)
-- Visual Studio 2022 (recommended) OR VS Code
+- .NET SDK (version 10.0 or later)
+- Visual Studio 2026 (recommended) or VS Code
 - SQL Server LocalDB (included with Visual Studio)
 
 ---
