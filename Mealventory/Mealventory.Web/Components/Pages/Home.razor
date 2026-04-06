@@ -1,4 +1,6 @@
-@* Owner 1: "Juan Pablo Ordonez Gomez" has added 90% of the code in this file *@
+@* Owner 1: "Juan Pablo Ordonez Gomez" has added 50% of the code in this file *@
+@* Owner 2: "Daniel Bajenov" has added 50% of the code in this file *@
+
 @page "/"
 @using Mealventory.Core.Models
 @using Mealventory.Web.Services
@@ -74,83 +76,9 @@ else
             </div>
         </div>
     </div>
-
-    @if (Notifications.Any())
-    {
-        <div class="alert alert-warning shadow-sm">
-            <h5 class="alert-heading">Expiring Soon!</h5>
-            <ul class="mb-0">
-                @foreach (var note in Notifications)
-                {
-                    <li>@note</li>
-                }
-            </ul>
-        </div>
-    }
-
-    <h4>Your Inventory</h4>
-    @if (foodItems == null)
-    {
-        <p><em>Loading your inventory...</em></p>
-    }
-    else if (!foodItems.Any())
-    {
-        <p>Your inventory is empty. Add some items above!</p>
-    }
-    else
-    {
-        <table class="table table-hover shadow-sm bg-white">
-            <thead class="table-dark">
-                <tr>
-                    <th>Name</th>
-                    <th>Quantity</th>
-                    <th>Expiration Date</th>
-                    <th>Location</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in foodItems.OrderBy(f => f.ExpirationDate))
-                {
-                    var isExpired = item.ExpirationDate.Date < DateTime.Today;
-                    var isExpiringSoon = !isExpired && item.ExpirationDate.Date <= DateTime.Today.AddDays(3);
-
-                    <tr class="@(isExpired ? "table-danger" : (isExpiringSoon ? "table-warning" : ""))">
-                        <td>@item.Name</td>
-                        <td>@item.Quantity</td>
-                        <td>@item.ExpirationDate.ToShortDateString()</td>
-                        <td>
-                            <span class="badge bg-secondary">@item.Location</span>
-                        </td>
-                        <td>
-                            @if (isExpired)
-                            {
-                                <span class="badge bg-danger">Expired</span>
-                            }
-                            else if (isExpiringSoon)
-                            {
-                                <span class="badge bg-warning text-dark">Expiring Soon</span>
-                            }
-                            else
-                            {
-                                <span class="badge" style="background-color: #8db600;">Fresh</span>
-                            }
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteItem(item.Id)">Delete</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
 }
 
 @code {
-    /// Field to store the current user's inventory items.
-    private List<FoodItem>? foodItems;
-
     /// Field to store the item being created from the add form.
     private FoodItem newItem = new()
     {
@@ -158,9 +86,6 @@ else
         Quantity = 1,
         Location = "Pantry"
     };
-
-    /// Field to store expiration and status notifications for the UI.
-    private List<string> Notifications = new();
 
     /// Field to store the latest add-item error message.
     private string? addErrorMessage;
@@ -196,47 +121,6 @@ else
             }
             catch { }
         }
-
-        if (AppState.CurrentUserId.HasValue)
-        {
-            await LoadItems();
-        }
-    }
-
-    /// Method to load inventory items for the current user.
-    private async Task LoadItems()
-    {
-        if (!AppState.CurrentUserId.HasValue)
-            return;
-
-        try
-        {
-            foodItems = await FoodApi.GetItemsAsync(AppState.CurrentUserId.Value) ?? new List<FoodItem>();
-            GenerateNotifications();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error loading items: {ex.Message}");
-        }
-    }
-
-    /// Method to build item expiration notifications from loaded inventory data.
-    private void GenerateNotifications()
-    {
-        Notifications.Clear();
-
-        if (foodItems == null)
-            return;
-
-        foreach (var item in foodItems)
-        {
-            if (item.ExpirationDate.Date == DateTime.Today)
-                Notifications.Add($"Your {item.Name} expires today!");
-            else if (item.ExpirationDate.Date < DateTime.Today)
-                Notifications.Add($"Your {item.Name} has expired.");
-            else if (item.ExpirationDate.Date <= DateTime.Today.AddDays(3))
-                Notifications.Add($"Your {item.Name} will expire on {item.ExpirationDate.ToShortDateString()}.");
-        }
     }
 
     /// Method to add a new food item for the current user.
@@ -268,8 +152,6 @@ else
                     Quantity = 1,
                     Location = "Pantry"
                 };
-
-                await LoadItems();
             }
             else
             {
@@ -281,24 +163,6 @@ else
         catch (Exception ex)
         {
             addErrorMessage = $"Error adding item: {ex.Message}";
-        }
-    }
-
-    /// Method to delete a food item for the current user.
-    private async Task DeleteItem(int id)
-    {
-        if (!AppState.CurrentUserId.HasValue)
-            return;
-
-        try
-        {
-            var response = await FoodApi.DeleteItemAsync(id, AppState.CurrentUserId.Value);
-            if (response.IsSuccessStatusCode)
-                await LoadItems();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error deleting item: {ex.Message}");
         }
     }
 

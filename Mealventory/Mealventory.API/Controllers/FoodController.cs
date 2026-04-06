@@ -45,17 +45,28 @@ namespace Mealventory.API.Controllers
             if (string.IsNullOrWhiteSpace(item.Name))
                 return BadRequest("Food name cannot be empty.");
 
-            var normalizedName = item.Name.Trim().ToLower();
+            item.Name = item.Name.Trim();
+            item.Location = item.Location.Trim();
+
+            var normalizedName = item.Name.ToLower();
+            var normalizedLocation = item.Location.ToLower();
+            var normalizedExpiry = item.ExpirationDate.Date;
 
             var existingItems = repository.GetAll(item.UserId);
 
-            if (existingItems.Any(f => f.Name.Trim().ToLower() == normalizedName))
-                return BadRequest($"{item.Name} already exists in your inventory.");
+            var matchingItem = existingItems.FirstOrDefault(f =>
+                f.Name.Trim().ToLower() == normalizedName &&
+                f.ExpirationDate.Date == normalizedExpiry &&
+                f.Location.Trim().ToLower() == normalizedLocation);
 
-            item.Name = item.Name.Trim();
+            if (matchingItem != null)
+            {
+                matchingItem.Quantity += item.Quantity;
+                var updated = repository.Update(matchingItem);
+                return Ok(updated);
+            }
 
             var created = repository.Add(item);
-
             return CreatedAtAction(nameof(Get), new { id = created.Id, userId = created.UserId }, created);
         }
 
