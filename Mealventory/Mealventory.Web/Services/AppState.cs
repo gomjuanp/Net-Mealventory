@@ -1,3 +1,4 @@
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 78.79% of the code in this file
 namespace Mealventory.Web.Services
 {
     public class AppState
