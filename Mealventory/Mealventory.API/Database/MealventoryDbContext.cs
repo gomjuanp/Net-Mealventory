@@ -1,4 +1,6 @@
-// Owner 1: "Juan Pablo Ordonez Gomez" has added 95.24% of the code in this file
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 95% of the code in this file
+// Owner 2: "Daniel Bajenov" has added 5% of the code in this file
+
 using Mealventory.Core.Models;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,4 +1,6 @@
-﻿window.mealventoryAuth = {
+﻿// Owner 1: "Daniel Bajenov" has added 100% of the code in this file
+
+window.mealventoryAuth = {
     saveUser: function (userId, username) {
         localStorage.setItem("mealventory_userId", userId);
         localStorage.setItem("mealventory_username", username);

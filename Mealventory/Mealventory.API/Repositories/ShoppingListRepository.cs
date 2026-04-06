@@ -1,4 +1,6 @@
-﻿using Mealventory.API.Database;
+﻿// Owner 1: "Daniel Bajenov" has added 100% of the code in this file
+
+using Mealventory.API.Database;
 using Mealventory.Core.Interfaces;
 using Mealventory.Core.Models;
 

@@ -1,4 +1,6 @@
-// Owner 1: "Juan Pablo Ordonez Gomez" has added 71% of the code in this file
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 77% of the code in this file
+// Owner 2: "Daniel Bajenov" has added 23% of the code in this file
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

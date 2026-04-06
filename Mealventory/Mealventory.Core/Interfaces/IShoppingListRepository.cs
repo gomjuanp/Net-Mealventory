@@ -1,4 +1,6 @@
-﻿using Mealventory.Core.Models;
+﻿// Owner 1: "Daniel Bajenov" has added 100% of the code in this file
+
+using Mealventory.Core.Models;
 using System.Collections.Generic;
 
 namespace Mealventory.Core.Interfaces

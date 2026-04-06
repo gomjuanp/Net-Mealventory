@@ -1,3 +1,6 @@
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 97% of the code in this file
+// Owner 2: "Daniel Bajenov" has added 3% of the code in this file
+
 using Mealventory.API.Database;
 using Mealventory.API.Repositories;
 using Mealventory.Core.Interfaces;

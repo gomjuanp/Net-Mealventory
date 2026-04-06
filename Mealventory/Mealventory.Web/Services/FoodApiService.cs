@@ -1,3 +1,6 @@
+// Owner 1: "Daniel Bajenov" has added 36.36% of the code in this file
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 63.64% of the code in this file
+
 using Mealventory.Core.Models;
 
 namespace Mealventory.Web.Services

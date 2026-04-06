@@ -1,4 +1,6 @@
-// Owner 1: "Juan Pablo Ordonez Gomez" has added 88% of the code in this file
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 60% of the code in this file
+// Owner 2: "Daniel Bajenov" has added 40% of the code in this file
+
 using Mealventory.Core.Interfaces;
 using Mealventory.Core.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +42,7 @@ namespace Mealventory.API.Controllers
                 return BadRequest("Food name cannot be empty.");
 
             item.Name = item.Name.Trim();
-            item.Location = item.Location.Trim();
+            item.Location = string.IsNullOrWhiteSpace(item.Location) ? "Pantry" : item.Location.Trim();
 
             var normalizedName = item.Name.ToLower();
             var normalizedLocation = item.Location.ToLower();

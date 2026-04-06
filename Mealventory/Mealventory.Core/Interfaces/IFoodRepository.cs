@@ -1,4 +1,6 @@
-// Owner 1: "Juan Pablo Ordonez Gomez" has added 77% of the code in this file
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 92% of the code in this file
+// Owner 2: "Daniel Bajenov" has added 8% of the code in this file
+
 
 using Mealventory.Core.Models;
 using System;
