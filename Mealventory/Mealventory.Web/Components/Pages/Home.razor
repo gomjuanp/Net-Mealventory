@@ -78,6 +78,7 @@ else
 }
 
 @code {
+    /// Field to store the item being created from the add form.
     private FoodItem newItem = new()
     {
         ExpirationDate = DateTime.Today.AddDays(7),
@@ -85,14 +86,21 @@ else
         Location = "Pantry"
     };
 
+    /// Field to store the latest add-item error message.
     private string? addErrorMessage;
 
+    /// Author: Juan Pablo Ordonez Gomez.
+    /// Stores user values loaded from browser storage.
     private class StoredUser
     {
+        /// Field to store the persisted user identifier string.
         public string? userId { get; set; }
+
+        /// Field to store the persisted username.
         public string? username { get; set; }
     }
 
+    /// Method to initialize state subscriptions, restore user data, and load inventory items.
     protected override async Task OnInitializedAsync()
     {
         AppState.OnChange += StateHasChanged;
@@ -114,6 +122,7 @@ else
         }
     }
 
+    /// Method to add a new food item for the current user.
     private async Task AddItem()
     {
         addErrorMessage = null;
@@ -156,6 +165,7 @@ else
         }
     }
 
+    /// Method to clear user session and navigate to the home page.
     private async Task Logout()
     {
         AppState.LogOut();
@@ -163,6 +173,7 @@ else
         NavigationManager.NavigateTo("/", forceLoad: true);
     }
 
+    /// Method to unsubscribe from state change notifications.
     public void Dispose()
     {
         AppState.OnChange -= StateHasChanged;

@@ -39,9 +39,13 @@
 </div>
 
 @code {
+    /// Field to store user login input values.
     private LoginRequest loginModel = new();
+
+    /// Field to store login error messages for display.
     private string? errorMessage;
 
+    /// Method to submit login credentials and establish user session state.
     private async Task HandleLogin()
     {
         errorMessage = null;

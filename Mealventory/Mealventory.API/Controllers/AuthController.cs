@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mealventory.API.Controllers
 {
+    /// Handles user registration and login endpoints.
     [ApiController]
     [Route("api/[controller]")]
     /// <summary>

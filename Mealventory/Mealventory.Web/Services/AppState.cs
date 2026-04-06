@@ -59,6 +59,7 @@ namespace Mealventory.Web.Services
             NotifyStateChanged();
         }
 
+        /// Method to notify listeners that state has changed.
         private void NotifyStateChanged() => OnChange?.Invoke();
     }
 }

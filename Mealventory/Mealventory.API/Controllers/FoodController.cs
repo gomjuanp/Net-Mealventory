@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Mealventory.API.Controllers
 {
+    /// Provides endpoints to manage food inventory items.
     [ApiController]
     [Route("api/[controller]")]
     /// <summary>
