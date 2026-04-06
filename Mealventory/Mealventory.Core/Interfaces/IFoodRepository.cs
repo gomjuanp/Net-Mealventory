@@ -1,4 +1,8 @@
-// Owner 1: "Juan Pablo Ordonez Gomez" has added 77% of the code in this file
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 92% of the code in this file
+// Owner 2: "Daniel Bajenov" has added 8% of the code in this file
+// Principal Author: Juan Pablo Ordonez Gomez
+// Description: Interface defining operations for food item persistence.
+
 
 using Mealventory.Core.Models;
 using System;
@@ -9,25 +13,47 @@ using System.Threading.Tasks;
 
 namespace Mealventory.Core.Interfaces
 {
-    /// Defines operations to manage food inventory items for a specific user.
+    /// <summary>
+    /// Repository interface for managing <see cref="Mealventory.Core.Models.FoodItem"/> entities.
+    /// </summary>
     public interface IFoodRepository
     {
-        /// Method to get all food items for a user.
+        /// <summary>
+        /// Gets all food items for a user.
+        /// </summary>
+        /// <param name="userId">User id.</param>
         IEnumerable<FoodItem> GetAll(int userId);
 
-        /// Method to get food items by user identifier.
+        /// <summary>
+        /// Gets food items by user (alias for GetAll).
+        /// </summary>
+        /// <param name="userId">User id.</param>
         IEnumerable<FoodItem> GetByUser(int userId);
 
-        /// Method to get a food item by item identifier and user identifier.
+        /// <summary>
+        /// Gets a food item by id for a given user.
+        /// </summary>
+        /// <param name="id">Item id.</param>
+        /// <param name="userId">User id.</param>
         FoodItem? GetById(int id, int userId);
 
-        /// Method to add a food item.
+        /// <summary>
+        /// Adds a new food item.
+        /// </summary>
+        /// <param name="item">Item to add.</param>
         FoodItem Add(FoodItem item);
 
-        /// Method to update an existing food item.
+        /// <summary>
+        /// Updates an existing food item.
+        /// </summary>
+        /// <param name="item">Updated item.</param>
         FoodItem? Update(FoodItem item);
 
-        /// Method to delete a food item by item identifier and user identifier.
+        /// <summary>
+        /// Deletes a food item by id for a user.
+        /// </summary>
+        /// <param name="id">Item id.</param>
+        /// <param name="userId">User id.</param>
         void Delete(int id, int userId);
     }
 }

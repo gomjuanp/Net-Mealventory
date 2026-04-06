@@ -1,4 +1,7 @@
-// Owner 1: "Juan Pablo Ordonez Gomez" has added 73% of the code in this file
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 74% of the code in this file
+// Owner 2: "Daniel Bajenov" has added 26% of the code in this file
+// Principal Author: Juan Pablo Ordonez Gomez
+// Description: Controller responsible for handling user authentication (register and login) API endpoints.
 using Mealventory.Core.Interfaces;
 using Mealventory.Core.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,18 +12,30 @@ namespace Mealventory.API.Controllers
     /// Handles user registration and login endpoints.
     [ApiController]
     [Route("api/[controller]")]
+    /// <summary>
+    /// Controller for user authentication endpoints (register, login).
+    /// </summary>
     public class AuthController : ControllerBase
     {
-        /// Field to store the user repository dependency.
+        /// <summary>
+        /// Repository used to access and manage user data.
+        /// </summary>
         private readonly IUserRepository _userRepository;
 
-        /// Method to create an authentication controller with required dependencies.
+        /// <summary>
+        /// Creates a new instance of <see cref="AuthController"/>.
+        /// </summary>
+        /// <param name="userRepository">Repository for user data.</param>
         public AuthController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        /// Method to register a new user account.
+        /// <summary>
+        /// Registers a new user.
+        /// </summary>
+        /// <param name="request">The registration request containing username, email and password.</param>
+        /// <returns>HTTP 200 with the created user info or 400/other status on error.</returns>
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
@@ -50,7 +65,11 @@ namespace Mealventory.API.Controllers
             return Ok(response);
         }
 
-        /// Method to authenticate a user with email and password.
+        /// <summary>
+        /// Logs a user in using email and password.
+        /// </summary>
+        /// <param name="request">The login request containing email and password.</param>
+        /// <returns>HTTP 200 with user info when successful or 401 on failure.</returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {

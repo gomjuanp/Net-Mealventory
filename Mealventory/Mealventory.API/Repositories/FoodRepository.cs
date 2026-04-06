@@ -1,23 +1,36 @@
 // Owner 1: "Juan Pablo Ordonez Gomez" has added 71% of the code in this file
+// Owner 2: "Daniel Bajenov" has added 29% of the code in this file
+// Principal Author: Juan Pablo Ordonez Gomez
+// Description: Repository implementation for managing FoodItem persistence.
 using Mealventory.API.Database;
 using Mealventory.Core.Interfaces;
 using Mealventory.Core.Models;
 
 namespace Mealventory.API.Repositories
 {
-    /// Provides data access operations for food inventory items.
+    /// <summary>
+    /// Concrete implementation of <see cref="IFoodRepository"/> using EF Core.
+    /// </summary>
     public class FoodRepository : IFoodRepository
     {
-        /// Field to store the database context dependency.
+        /// <summary>
+        /// EF Core DbContext instance.
+        /// </summary>
         private readonly MealventoryDbContext _context;
 
-        /// Method to create a food repository with required dependencies.
+        /// <summary>
+        /// Constructs a new <see cref="FoodRepository"/>.
+        /// </summary>
+        /// <param name="context">DbContext to use for data access.</param>
         public FoodRepository(MealventoryDbContext context)
         {
             _context = context;
         }
 
-        /// Method to get all food items for a user.
+        /// <summary>
+        /// Gets all food items for the specified user.
+        /// </summary>
+        /// <param name="userId">User id.</param>
         public IEnumerable<FoodItem> GetAll(int userId)
         {
             return _context.FoodItems
@@ -25,7 +38,10 @@ namespace Mealventory.API.Repositories
                 .ToList();
         }
 
-        /// Method to get food items by user identifier.
+        /// <summary>
+        /// Gets food items by user (alias for GetAll).
+        /// </summary>
+        /// <param name="userId">User id.</param>
         public IEnumerable<FoodItem> GetByUser(int userId)
         {
             return _context.FoodItems
@@ -33,14 +49,21 @@ namespace Mealventory.API.Repositories
                 .ToList();
         }
 
-        /// Method to get a food item by item identifier and user identifier.
+        /// <summary>
+        /// Gets a single food item for the given id and user.
+        /// </summary>
+        /// <param name="id">Food id.</param>
+        /// <param name="userId">User id.</param>
         public FoodItem? GetById(int id, int userId)
         {
             return _context.FoodItems
                 .FirstOrDefault(f => f.Id == id && f.UserId == userId);
         }
 
-        /// Method to add a new food item.
+        /// <summary>
+        /// Adds and persists a new food item.
+        /// </summary>
+        /// <param name="item">Food item to add.</param>
         public FoodItem Add(FoodItem item)
         {
             _context.FoodItems.Add(item);
@@ -48,7 +71,10 @@ namespace Mealventory.API.Repositories
             return item;
         }
 
-        /// Method to update an existing food item.
+        /// <summary>
+        /// Updates an existing food item.
+        /// </summary>
+        /// <param name="item">Updated food item.</param>
         public FoodItem? Update(FoodItem item)
         {
             var existing = _context.FoodItems
@@ -66,7 +92,11 @@ namespace Mealventory.API.Repositories
             return existing;
         }
 
-        /// Method to delete a food item by item identifier and user identifier.
+        /// <summary>
+        /// Deletes a food item for the specified user.
+        /// </summary>
+        /// <param name="id">Id of the item to delete.</param>
+        /// <param name="userId">Owner user id.</param>
         public void Delete(int id, int userId)
         {
             var item = _context.FoodItems

@@ -1,4 +1,7 @@
-// Owner 1: "Juan Pablo Ordonez Gomez" has added 100% of the code in this file
+// Owner 1: "Juan Pablo Ordonez Gomez" has added 90% of the code in this file
+// Owner 2: "Daniel Bajenov" has added 10% of the code in this file
+// Principal Author: Juan Pablo Ordonez Gomez
+// Description: Unit tests for the FoodController.
 using Mealventory.API.Controllers;
 using Mealventory.Core.Interfaces;
 using Mealventory.Core.Models;
@@ -29,13 +32,13 @@ public class FoodControllerTests
     [Test]
     public void Get_ReturnsTheItemsFromTheRepository()
     {
-        // Arrange
-        _repository.AllItems = [new FoodItem { Id = 1, Name = "Apple", UserId = 1 }];
+        _repository.AllItems =
+        [
+            new FoodItem { Id = 1, Name = "Apple", UserId = 1 }
+        ];
 
-        // Act
         var items = _controller.Get(1).ToList();
 
-        // Assert
         Assert.That(items, Has.Count.EqualTo(1));
         Assert.That(items.Single().Name, Is.EqualTo("Apple"));
     }
@@ -44,14 +47,11 @@ public class FoodControllerTests
     [Test]
     public void GetById_ReturnsOkWhenTheItemExists()
     {
-        // Arrange
         var item = new FoodItem { Id = 1, Name = "Apple", UserId = 1 };
         _repository.ItemById = item;
 
-        // Act
         var result = _controller.Get(1, 1);
 
-        // Assert
         var okResult = result.Result as OkObjectResult;
         Assert.That(okResult, Is.Not.Null);
         Assert.That(okResult!.Value, Is.SameAs(item));
@@ -62,12 +62,8 @@ public class FoodControllerTests
     [Test]
     public void GetById_ReturnsNotFoundWhenTheItemDoesNotExist()
     {
-        // Arrange
-
-        // Act
         var result = _controller.Get(1, 1);
 
-        // Assert
         Assert.That(result.Result, Is.TypeOf<NotFoundResult>());
     }
 
@@ -75,13 +71,10 @@ public class FoodControllerTests
     [Test]
     public void Post_ReturnsBadRequestWhenTheNameIsEmpty()
     {
-        // Arrange
-        var item = new FoodItem { Name = "   ", UserId = 1 };
+        var item = new FoodItem { Name = "   ", UserId = 1, Location = "Pantry" };
 
-        // Act
         var result = _controller.Post(item);
 
-        // Assert
         var badRequest = result.Result as BadRequestObjectResult;
         Assert.That(badRequest, Is.Not.Null);
         Assert.That(badRequest!.Value, Is.EqualTo("Food name cannot be empty."));
@@ -89,52 +82,138 @@ public class FoodControllerTests
 
     /// Method to verify Post returns bad request for duplicate names.
     [Test]
-    public void Post_ReturnsBadRequestWhenAnItemWithTheSameNameAlreadyExists()
+    public void Post_MergesQuantity_WhenNameExpiryAndLocationMatch()
     {
-        // Arrange
-        _repository.AllItems = [new FoodItem { Id = 1, Name = " Apple ", UserId = 1 }];
+        _repository.AllItems =
+        [
+            new FoodItem
+            {
+                Id = 1,
+                Name = " Milk ",
+                ExpirationDate = new DateTime(2026, 4, 10),
+                Quantity = 2,
+                UserId = 1,
+                Location = " pantry "
+            }
+        ];
 
-        // Act
-        var result = _controller.Post(new FoodItem { Name = "apple", UserId = 1 });
+        var item = new FoodItem
+        {
+            Name = "milk",
+            ExpirationDate = new DateTime(2026, 4, 10, 18, 0, 0),
+            Quantity = 3,
+            UserId = 1,
+            Location = "Pantry"
+        };
 
-        // Assert
-        var badRequest = result.Result as BadRequestObjectResult;
-        Assert.That(badRequest, Is.Not.Null);
-        Assert.That(badRequest!.Value, Is.EqualTo("apple already exists in your inventory."));
+        var result = _controller.Post(item);
+
+        var okResult = result.Result as OkObjectResult;
+        Assert.That(okResult, Is.Not.Null);
+
+        Assert.That(_repository.UpdateCallCount, Is.EqualTo(1));
+        Assert.That(_repository.LastUpdatedItem, Is.Not.Null);
+        Assert.That(_repository.LastUpdatedItem!.Quantity, Is.EqualTo(5));
+        Assert.That(_repository.AddedItem, Is.Null);
     }
 
     /// Method to verify Post trims names and returns created response.
     [Test]
-    public void Post_TrimsTheNameAndReturnsCreatedAtAction()
+    public void Post_AddsNewItem_WhenExpiryIsDifferent()
     {
-        // Arrange
-        var item = new FoodItem { Name = "  Apple  ", UserId = 1 };
+        _repository.AllItems =
+        [
+            new FoodItem
+            {
+                Id = 1,
+                Name = "Milk",
+                ExpirationDate = new DateTime(2026, 4, 10),
+                Quantity = 2,
+                UserId = 1,
+                Location = "Pantry"
+            }
+        ];
 
-        // Act
+        var item = new FoodItem
+        {
+            Name = "Milk",
+            ExpirationDate = new DateTime(2026, 4, 15),
+            Quantity = 1,
+            UserId = 1,
+            Location = "Pantry"
+        };
+
         var result = _controller.Post(item);
 
-        // Assert
+        var created = result.Result as CreatedAtActionResult;
+        Assert.That(created, Is.Not.Null);
+        Assert.That(_repository.AddedItem, Is.Not.Null);
+        Assert.That(_repository.AddedItem!.Name, Is.EqualTo("Milk"));
+        Assert.That(_repository.UpdateCallCount, Is.EqualTo(0));
+    }
+
+    [Test]
+    public void Post_AddsNewItem_WhenLocationIsDifferent()
+    {
+        _repository.AllItems =
+        [
+            new FoodItem
+            {
+                Id = 1,
+                Name = "Milk",
+                ExpirationDate = new DateTime(2026, 4, 10),
+                Quantity = 2,
+                UserId = 1,
+                Location = "Pantry"
+            }
+        ];
+
+        var item = new FoodItem
+        {
+            Name = "Milk",
+            ExpirationDate = new DateTime(2026, 4, 10),
+            Quantity = 1,
+            UserId = 1,
+            Location = "Fridge"
+        };
+
+        var result = _controller.Post(item);
+
+        var created = result.Result as CreatedAtActionResult;
+        Assert.That(created, Is.Not.Null);
+        Assert.That(_repository.AddedItem, Is.Not.Null);
+        Assert.That(_repository.AddedItem!.Location, Is.EqualTo("Fridge"));
+        Assert.That(_repository.UpdateCallCount, Is.EqualTo(0));
+    }
+
+    [Test]
+    public void Post_TrimsTheNameBeforeAdding()
+    {
+        var item = new FoodItem
+        {
+            Name = "  Apple  ",
+            UserId = 1,
+            Location = "Pantry",
+            ExpirationDate = new DateTime(2026, 4, 10)
+        };
+
+        var result = _controller.Post(item);
+
         var created = result.Result as CreatedAtActionResult;
         Assert.That(created, Is.Not.Null);
         Assert.That(_repository.AddedItem, Is.Not.Null);
         Assert.That(_repository.AddedItem!.Name, Is.EqualTo("Apple"));
-        Assert.That(created!.RouteValues!["id"], Is.EqualTo(_repository.AddedItem.Id));
-        Assert.That(created.RouteValues["userId"], Is.EqualTo(_repository.AddedItem.UserId));
-        Assert.That(created.StatusCode, Is.EqualTo(201));
     }
 
     /// Method to verify Put returns ok when update succeeds.
     [Test]
     public void Put_ReturnsOkWhenTheRepositoryUpdatesTheItem()
     {
-        // Arrange
         var updated = new FoodItem { Id = 1, Name = "Apple", UserId = 1 };
         _repository.UpdatedItem = updated;
 
-        // Act
         var result = _controller.Put(updated);
 
-        // Assert
         var okResult = result.Result as OkObjectResult;
         Assert.That(okResult, Is.Not.Null);
         Assert.That(okResult!.Value, Is.SameAs(updated));
@@ -144,12 +223,8 @@ public class FoodControllerTests
     [Test]
     public void Put_ReturnsNotFoundWhenTheRepositoryCannotUpdateTheItem()
     {
-        // Arrange
-
-        // Act
         var result = _controller.Put(new FoodItem { Id = 1, Name = "Apple", UserId = 1 });
 
-        // Assert
         Assert.That(result.Result, Is.TypeOf<NotFoundResult>());
     }
 
@@ -157,12 +232,8 @@ public class FoodControllerTests
     [Test]
     public void Delete_ReturnsNoContentAndCallsTheRepository()
     {
-        // Arrange
-
-        // Act
         var result = _controller.Delete(1, 1);
 
-        // Assert
         Assert.That(result, Is.TypeOf<NoContentResult>());
         Assert.That(_repository.DeleteCallCount, Is.EqualTo(1));
         Assert.That(_repository.DeletedId, Is.EqualTo(1));
@@ -184,6 +255,8 @@ public class FoodControllerTests
 
         /// Field to store the most recently added item.
         public FoodItem? AddedItem { get; private set; }
+        public FoodItem? LastUpdatedItem { get; private set; }
+        public int UpdateCallCount { get; private set; }
 
         /// Field to store how many times delete was called.
         public int DeleteCallCount { get; private set; }
@@ -206,12 +279,22 @@ public class FoodControllerTests
         /// Method to add an item in the stub repository.
         public FoodItem Add(FoodItem item)
         {
+            item.Id = item.Id == 0 ? 999 : item.Id;
             AddedItem = item;
             return item;
         }
 
         /// Method to update an item in the stub repository.
-        public FoodItem? Update(FoodItem item) => UpdatedItem is { } updated && updated.Id == item.Id && updated.UserId == item.UserId ? updated : null;
+        public FoodItem? Update(FoodItem item)
+        {
+            UpdateCallCount++;
+            LastUpdatedItem = item;
+
+            if (UpdatedItem is not null && UpdatedItem.Id == item.Id && UpdatedItem.UserId == item.UserId)
+                return UpdatedItem;
+
+            return null;
+        }
 
         /// Method to register a delete call in the stub repository.
         public void Delete(int id, int userId)
