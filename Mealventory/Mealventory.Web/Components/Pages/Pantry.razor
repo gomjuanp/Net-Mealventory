@@ -6,6 +6,11 @@
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JS
 
+@if (!AppState.CurrentUserId.HasValue)
+{
+    NavigationManager.NavigateTo("/login");
+}
+
 <PageTitle>Mealventory - Pantry</PageTitle>
 
 @if (!AppState.CurrentUserId.HasValue)

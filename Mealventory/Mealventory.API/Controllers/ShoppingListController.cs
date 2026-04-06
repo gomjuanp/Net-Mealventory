@@ -38,19 +38,21 @@ namespace Mealventory.API.Controllers
 
             var created = _shoppingRepo.Add(item);
 
+            string? warning = null;
+
             if (existing != null)
             {
-                return Ok(new
-                {
-                    item = created,
-                    warning = $"{item.Name} is already in your {existing.Location.ToLower()}."
-                });
+                var location = string.IsNullOrWhiteSpace(existing.Location)
+                    ? "inventory"
+                    : existing.Location.ToLower();
+
+                warning = $"{item.Name} was added to your shopping list, but it is already in your {location}.";
             }
 
             return Ok(new
             {
                 item = created,
-                warning = (string?)null
+                warning
             });
         }
 
