@@ -1,5 +1,7 @@
 // Owner 1: "Juan Pablo Ordonez Gomez" has added 90% of the code in this file
 // Owner 2: "Daniel Bajenov" has added 10% of the code in this file
+// Principal Author: Juan Pablo Ordonez Gomez
+// Description: Unit tests for the FoodController.
 using Mealventory.API.Controllers;
 using Mealventory.Core.Interfaces;
 using Mealventory.Core.Models;

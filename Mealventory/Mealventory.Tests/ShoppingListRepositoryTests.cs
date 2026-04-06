@@ -1,5 +1,8 @@
 ﻿// Owner 1: "Daniel Bajenov" has added 100% of the code in this file
 
+// Principal Author: Daniel Bajenov
+// Description: Unit tests for the ShoppingListRepository.
+
 using Mealventory.API.Database;
 using Mealventory.API.Repositories;
 using Mealventory.Core.Models;
