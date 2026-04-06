@@ -4,18 +4,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mealventory.API.Database
 {
+    /// Configures database entities and relationships for the Mealventory API.
     public class MealventoryDbContext : DbContext
     {
+        /// Method to create a database context with configured options.
         public MealventoryDbContext(DbContextOptions<MealventoryDbContext> options)
             : base(options)
         {
         }
 
+        /// Field to access user records.
         public DbSet<User> Users { get; set; }
+
+        /// Field to access food item records.
         public DbSet<FoodItem> FoodItems { get; set; }
 
+        /// Field to access shopping list item records.
         public DbSet<ShoppingListItem> ShoppingListItems { get; set; }
 
+        /// Method to configure model relationships and seed data.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()

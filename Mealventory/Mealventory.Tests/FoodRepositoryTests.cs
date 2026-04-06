@@ -7,12 +7,17 @@ using NUnit.Framework;
 
 namespace Mealventory.Tests;
 
+/// Tests behavior of food repository data operations.
 [TestFixture]
 public class FoodRepositoryTests
 {
+    /// Field to store the in-memory database context used by tests.
     private MealventoryDbContext _context = null!;
+
+    /// Field to store the repository under test.
     private FoodRepository _repository = null!;
 
+    /// Method to initialize in-memory database and repository before each test.
     [SetUp]
     public void SetUp()
     {
@@ -24,12 +29,14 @@ public class FoodRepositoryTests
         _repository = new FoodRepository(_context);
     }
 
+    /// Method to dispose in-memory database context after each test.
     [TearDown]
     public void TearDown()
     {
         _context.Dispose();
     }
 
+    /// Method to verify GetAll returns only items for requested user.
     [Test]
     public void GetAll_ReturnsOnlyItemsForTheRequestedUser()
     {
@@ -48,6 +55,7 @@ public class FoodRepositoryTests
         Assert.That(items.All(item => item.UserId == 1), Is.True);
     }
 
+    /// Method to verify GetByUser returns only items for requested user.
     [Test]
     public void GetByUser_ReturnsOnlyItemsForTheRequestedUser()
     {
@@ -66,6 +74,7 @@ public class FoodRepositoryTests
         Assert.That(items.Single().Name, Is.EqualTo("Milk"));
     }
 
+    /// Method to verify GetById returns matching item for requested user.
     [Test]
     public void GetById_ReturnsTheMatchingItemForTheRequestedUser()
     {
@@ -81,6 +90,7 @@ public class FoodRepositoryTests
         Assert.That(item!.Name, Is.EqualTo("Apple"));
     }
 
+    /// Method to verify GetById returns null for a different user.
     [Test]
     public void GetById_ReturnsNullWhenTheItemDoesNotBelongToTheRequestedUser()
     {
@@ -95,6 +105,7 @@ public class FoodRepositoryTests
         Assert.That(item, Is.Null);
     }
 
+    /// Method to verify Add persists a new item.
     [Test]
     public void Add_PersistsTheItem()
     {
@@ -109,6 +120,7 @@ public class FoodRepositoryTests
         Assert.That(_context.FoodItems.Count(), Is.EqualTo(1));
     }
 
+    /// Method to verify Update changes the existing item values.
     [Test]
     public void Update_UpdatesTheExistingItem()
     {
@@ -144,6 +156,7 @@ public class FoodRepositoryTests
         Assert.That(result.ExpirationDate, Is.EqualTo(updated.ExpirationDate));
     }
 
+    /// Method to verify Update returns null when target item is missing.
     [Test]
     public void Update_ReturnsNullWhenTheItemDoesNotExist()
     {
@@ -157,6 +170,7 @@ public class FoodRepositoryTests
         Assert.That(result, Is.Null);
     }
 
+    /// Method to verify Delete removes a matching item.
     [Test]
     public void Delete_RemovesTheMatchingItem()
     {
@@ -171,6 +185,7 @@ public class FoodRepositoryTests
         Assert.That(_context.FoodItems.Count(), Is.EqualTo(0));
     }
 
+    /// Method to verify Delete does nothing when item is missing.
     [Test]
     public void Delete_DoesNothingWhenTheItemDoesNotExist()
     {

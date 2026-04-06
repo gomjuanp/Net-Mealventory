@@ -41,9 +41,13 @@
 </div>
 
 @code {
+    /// Field to store user registration input values.
     private RegisterRequest registerModel = new();
+
+    /// Field to store registration error messages for display.
     private string? errorMessage;
 
+    /// Method to submit registration data and establish user session state.
     private async Task HandleRegister()
     {
         errorMessage = null;

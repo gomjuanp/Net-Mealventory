@@ -5,23 +5,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Mealventory.API.Controllers
 {
+    /// Provides endpoints to manage food inventory items.
     [ApiController]
     [Route("api/[controller]")]
     public class FoodController : ControllerBase
     {
+        /// Field to store the food repository dependency.
         private readonly IFoodRepository repository;
 
+        /// Method to create a food controller with required dependencies.
         public FoodController(IFoodRepository repo)
         {
             repository = repo;
         }
 
+        /// Method to get all food items for a user.
         [HttpGet]
         public IEnumerable<FoodItem> Get([FromQuery] int userId)
         {
             return repository.GetAll(userId);
         }
 
+        /// Method to get a specific food item by identifier for a user.
         [HttpGet("{id}")]
         public ActionResult<FoodItem> Get(int id, [FromQuery] int userId)
         {
@@ -33,6 +38,7 @@ namespace Mealventory.API.Controllers
             return Ok(item);
         }
 
+        /// Method to create a new food item.
         [HttpPost]
         public ActionResult<FoodItem> Post([FromBody] FoodItem item)
         {
@@ -53,6 +59,7 @@ namespace Mealventory.API.Controllers
             return CreatedAtAction(nameof(Get), new { id = created.Id, userId = created.UserId }, created);
         }
 
+        /// Method to update an existing food item.
         [HttpPut]
         public ActionResult<FoodItem> Put([FromBody] FoodItem item)
         {
@@ -64,6 +71,7 @@ namespace Mealventory.API.Controllers
             return Ok(updated);
         }
 
+        /// Method to delete a food item for a user.
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, [FromQuery] int userId)
         {

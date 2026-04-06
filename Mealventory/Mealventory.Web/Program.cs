@@ -1,4 +1,5 @@
 // Owner 1: "Juan Pablo Ordonez Gomez" has added 100% of the code in this file
+/// Configures services and middleware for the Mealventory Blazor web application.
 using Mealventory.Web.Components;
 using Mealventory.Web.Services;
 

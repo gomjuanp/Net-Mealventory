@@ -7,12 +7,17 @@ using NUnit.Framework;
 
 namespace Mealventory.Tests;
 
+/// Tests behavior of user repository data operations.
 [TestFixture]
 public class UserRepositoryTests
 {
+    /// Field to store the in-memory database context used by tests.
     private MealventoryDbContext _context = null!;
+
+    /// Field to store the repository under test.
     private UserRepository _repository = null!;
 
+    /// Method to initialize in-memory database and repository before each test.
     [SetUp]
     public void SetUp()
     {
@@ -24,12 +29,14 @@ public class UserRepositoryTests
         _repository = new UserRepository(_context);
     }
 
+    /// Method to dispose in-memory database context after each test.
     [TearDown]
     public void TearDown()
     {
         _context.Dispose();
     }
 
+    /// Method to verify GetUserByEmailAsync returns a matching user.
     [Test]
     public async Task GetUserByEmailAsync_ReturnsTheMatchingUser()
     {
@@ -45,6 +52,7 @@ public class UserRepositoryTests
         Assert.That(user!.Username, Is.EqualTo("juan"));
     }
 
+    /// Method to verify GetUserByEmailAsync returns null when no user matches.
     [Test]
     public async Task GetUserByEmailAsync_ReturnsNullWhenNoUserMatches()
     {
@@ -57,6 +65,7 @@ public class UserRepositoryTests
         Assert.That(user, Is.Null);
     }
 
+    /// Method to verify CreateUserAsync persists a user.
     [Test]
     public async Task CreateUserAsync_PersistsTheUser()
     {
@@ -71,6 +80,7 @@ public class UserRepositoryTests
         Assert.That(await _context.Users.CountAsync(), Is.EqualTo(1));
     }
 
+    /// Method to verify GetUserByIdAsync returns the matching user.
     [Test]
     public async Task GetUserByIdAsync_ReturnsTheMatchingUser()
     {
@@ -86,6 +96,7 @@ public class UserRepositoryTests
         Assert.That(user!.Email, Is.EqualTo("juan@example.com"));
     }
 
+    /// Method to verify GetUserByIdAsync returns null when no user matches.
     [Test]
     public async Task GetUserByIdAsync_ReturnsNullWhenNoUserMatches()
     {

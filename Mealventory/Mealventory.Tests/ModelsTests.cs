@@ -4,9 +4,11 @@ using NUnit.Framework;
 
 namespace Mealventory.Tests;
 
+/// Tests default model values and collections.
 [TestFixture]
 public class ModelsTests
 {
+    /// Method to verify user food items collection starts empty.
     [Test]
     public void User_FoodItemsStartsEmpty()
     {
@@ -21,6 +23,7 @@ public class ModelsTests
         Assert.That(foodItems, Is.Empty);
     }
 
+    /// Method to verify food item default location is pantry.
     [Test]
     public void FoodItem_DefaultLocationIsPantry()
     {
@@ -34,6 +37,7 @@ public class ModelsTests
         Assert.That(location, Is.EqualTo("Pantry"));
     }
 
+    /// Method to verify food item default name is empty string.
     [Test]
     public void FoodItem_DefaultNameIsEmptyString()
     {

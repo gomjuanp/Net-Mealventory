@@ -6,17 +6,21 @@ using System.Threading.Tasks;
 
 namespace Mealventory.API.Controllers
 {
+    /// Handles user registration and login endpoints.
     [ApiController]
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
+        /// Field to store the user repository dependency.
         private readonly IUserRepository _userRepository;
 
+        /// Method to create an authentication controller with required dependencies.
         public AuthController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
+        /// Method to register a new user account.
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
@@ -46,6 +50,7 @@ namespace Mealventory.API.Controllers
             return Ok(response);
         }
 
+        /// Method to authenticate a user with email and password.
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
